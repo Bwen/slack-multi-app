@@ -1,0 +1,5 @@
+{
+  "name": "udel",
+  "desc": "Removes user(s) from group",
+  "usage": "/tt admin:groups:udel <group> <@user>..."
+}

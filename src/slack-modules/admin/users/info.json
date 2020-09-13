@@ -1,0 +1,5 @@
+{
+  "name": "users",
+  "desc": "Lists all users with their groups",
+  "usage": "/tt admin:users"
+}

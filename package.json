@@ -1,0 +1,43 @@
+{
+  "name": "slack-multi-app",
+  "version": "1.0.0",
+  "description": "Slack App to support multiple apps structure within a single one",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore .",
+    "dev": "sequelize db:migrate --env development && sequelize db:seed:all --env development && nodemon node src/",
+    "test": "sequelize db:migrate --env test && sequelize db:seed:all --env test && nyc --reporter=html --reporter=text mocha",
+    "start": "sequelize db:migrate --env production && sequelize --env production db:seed:all && NODE_ENV=production node src/",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "author": "Philippe Guilbault",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/web-api": "^5.11.0",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-winston": "^4.0.5",
+    "got": "^11.5.2",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.4",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "coveralls": "^3.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-strongloop": "^2.1.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.3.0",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "mocha": "^8.1.1",
+    "mock-require": "^3.0.3",
+    "nyc": "^15.1.0",
+    "sqlite3": "^5.0.0"
+  }
+}

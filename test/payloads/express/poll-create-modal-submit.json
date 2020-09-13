@@ -1,0 +1,349 @@
+{
+  "type": "view_submission",
+  "team": {
+    "id": "T0194H3N84Q",
+    "domain": "smartnewbs"
+  },
+  "user": {
+    "id": "U01880B2JB0",
+    "username": "philippe.guilbault",
+    "name": "philippe.guilbault",
+    "team_id": "T0194H3N84Q"
+  },
+  "api_app_id": "A018DC70CUD",
+  "token": "hwpd5RvPkWxkvaVAamCKOt8I",
+  "trigger_id": "1341966596673.1310581756160.a84c5176ac244bd54a57969b95182a87",
+  "view": {
+    "id": "V0198HJFLCF",
+    "team_id": "T0194H3N84Q",
+    "type": "modal",
+    "blocks": [
+      {
+        "type": "input",
+        "block_id": "question",
+        "label": {
+          "type": "plain_text",
+          "text": "Your Poll Question",
+          "emoji": true
+        },
+        "optional": false,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "2Ck"
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "options",
+        "label": {
+          "type": "plain_text",
+          "text": "Options",
+          "emoji": true
+        },
+        "optional": true,
+        "element": {
+          "type": "checkboxes",
+          "action_id": "HY5X",
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Post anonymously",
+                "emoji": true
+              },
+              "value": "post_anonymous"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Anonymous votes",
+                "emoji": true
+              },
+              "value": "anonymous_votes"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Allow vote change",
+                "emoji": true
+              },
+              "value": "vote_change"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Allow suggestions",
+                "emoji": true
+              },
+              "value": "suggestion"
+            }
+          ]
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "end_date",
+        "label": {
+          "type": "plain_text",
+          "text": "Voting ends",
+          "emoji": true
+        },
+        "hint": {
+          "type": "plain_text",
+          "text": "If date is in the past, you'll be able to vote forever",
+          "emoji": true
+        },
+        "optional": false,
+        "element": {
+          "type": "datepicker",
+          "action_id": "+Q3",
+          "initial_date": "2020-08-01",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Select a date",
+            "emoji": true
+          }
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "vote_per_user",
+        "label": {
+          "type": "plain_text",
+          "text": " ",
+          "emoji": true
+        },
+        "optional": false,
+        "element": {
+          "type": "static_select",
+          "action_id": "P+JVt",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "How many votes per user",
+            "emoji": true
+          },
+          "initial_option": {
+            "text": {
+              "type": "plain_text",
+              "text": "One vote per user",
+              "emoji": true
+            },
+            "value": "1"
+          },
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Unlimited votes per user",
+                "emoji": true
+              },
+              "value": "0"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "One vote per user",
+                "emoji": true
+              },
+              "value": "1"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Two votes per user",
+                "emoji": true
+              },
+              "value": "2"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Three votes per user",
+                "emoji": true
+              },
+              "value": "3"
+            }
+          ]
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "choice_1",
+        "label": {
+          "type": "plain_text",
+          "text": " ",
+          "emoji": true
+        },
+        "optional": false,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "HFF",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Choice #1",
+            "emoji": true
+          }
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "choice_2",
+        "label": {
+          "type": "plain_text",
+          "text": " ",
+          "emoji": true
+        },
+        "optional": false,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "dLtD",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Choice #2",
+            "emoji": true
+          }
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "choice_3",
+        "label": {
+          "type": "plain_text",
+          "text": " ",
+          "emoji": true
+        },
+        "optional": false,
+        "element": {
+          "type": "plain_text_input",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Choice #3",
+            "emoji": true
+          },
+          "action_id": "dNfGp"
+        }
+      },
+      {
+        "type": "actions",
+        "block_id": "BzV9",
+        "elements": [
+          {
+            "type": "button",
+            "action_id": "lb7",
+            "text": {
+              "type": "plain_text",
+              "text": "Add Choice",
+              "emoji": true
+            },
+            "value": "poll:create addChoice=1"
+          }
+        ]
+      }
+    ],
+    "private_metadata": "poll:create channel=C018ETVMD0T",
+    "callback_id": "",
+    "state": {
+      "values": {
+        "question": {
+          "2Ck": {
+            "type": "plain_text_input",
+            "value": "This is a test question"
+          }
+        },
+        "options": {
+          "HY5X": {
+            "type": "checkboxes",
+            "selected_options": [
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Post anonymously",
+                  "emoji": true
+                },
+                "value": "post_anonymous"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Anonymous votes",
+                  "emoji": true
+                },
+                "value": "anonymous_votes"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Allow vote change",
+                  "emoji": true
+                },
+                "value": "vote_change"
+              }
+            ]
+          }
+        },
+        "end_date": {
+          "+Q3": {
+            "type": "datepicker",
+            "selected_date": "2020-08-01"
+          }
+        },
+        "vote_per_user": {
+          "P+JVt": {
+            "type": "static_select",
+            "selected_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "Two votes per user",
+                "emoji": true
+              },
+              "value": "2"
+            }
+          }
+        },
+        "choice_1": {
+          "HFF": {
+            "type": "plain_text_input",
+            "value": "Test choice 1"
+          }
+        },
+        "choice_2": {
+          "dLtD": {
+            "type": "plain_text_input",
+            "value": "Test choice 2"
+          }
+        },
+        "choice_3": {
+          "dNfGp": {
+            "type": "plain_text_input",
+            "value": "Test Choice 3"
+          }
+        }
+      }
+    },
+    "hash": "1598612744.xSoAUSbU",
+    "title": {
+      "type": "plain_text",
+      "text": "New Poll",
+      "emoji": true
+    },
+    "clear_on_close": false,
+    "notify_on_close": false,
+    "close": {
+      "type": "plain_text",
+      "text": "Cancel",
+      "emoji": true
+    },
+    "submit": {
+      "type": "plain_text",
+      "text": "Post",
+      "emoji": true
+    },
+    "previous_view_id": null,
+    "root_view_id": "V0198HJFLCF",
+    "app_id": "A018DC70CUD",
+    "external_id": "",
+    "app_installed_team_id": "T0194H3N84Q",
+    "bot_id": "B0194K7TZ40"
+  },
+  "response_urls": []
+}

@@ -1,0 +1,5 @@
+{
+  "name": "create",
+  "desc": ["Open modal to create poll", "Quick poll create"],
+  "usage": ["/tt poll:create", "/tt poll:create <\"Poll Question\"> <\"Poll Choice\">..."]
+}

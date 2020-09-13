@@ -1,0 +1,17 @@
+{
+  "type": "modal",
+  "private_metadata": "poll create",
+  "title": {
+    "type": "plain_text",
+    "text": "New Poll"
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Post to Channel"
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Cancel"
+  },
+  "blocks": []
+}

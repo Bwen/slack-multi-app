@@ -1,0 +1,37 @@
+{
+  "type": "modal",
+  "title": {
+    "type": "plain_text",
+    "text": "Validation Error"
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Close"
+  },
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": null
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "plain_text",
+          "text": null,
+          "emoji": true
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": null
+      }
+    }
+  ]
+}

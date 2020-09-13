@@ -1,0 +1,207 @@
+{
+  "module": { "path": [ "poll", "create" ], "params": { "addChoice": "1" } },
+  "view": {
+    "id": "V01AFVDUWRW",
+    "team_id": "T0194H3N84Q",
+    "type": "modal",
+    "blocks": [
+      {
+        "type": "input",
+        "block_id": "question",
+        "label": { "type": "plain_text", "text": "Your Poll Question", "emoji": true },
+        "optional": false,
+        "element": { "type": "plain_text_input", "action_id": "PEnT" }
+      },
+      {
+        "type": "input",
+        "block_id": "options",
+        "label": { "type": "plain_text", "text": "Options", "emoji": true },
+        "optional": true,
+        "element": {
+          "type": "checkboxes",
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Post anonymously",
+                "emoji": true
+              },
+              "value": "post_anonymous"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Anonymous votes",
+                "emoji": true
+              },
+              "value": "anonymous_votes"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Allow vote change",
+                "emoji": true
+              },
+              "value": "vote_change"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Allow suggestions",
+                "emoji": true
+              },
+              "value": "suggestion"
+            }
+          ],
+          "action_id": "GxB7"
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "end_date",
+        "label": { "type": "plain_text", "text": "Voting ends", "emoji": true },
+        "hint": {
+          "type": "plain_text",
+          "text": "If date is in the past, you\"ll be able to vote forever",
+          "emoji": true
+        },
+        "optional": false,
+        "element": {
+          "type": "datepicker",
+          "initial_date": "2020-08-01",
+          "placeholder": { "type": "plain_text", "text": "Select a date", "emoji": true },
+          "action_id": "qPC"
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "vote_per_user",
+        "label": { "type": "plain_text", "text": " ", "emoji": true },
+        "optional": false,
+        "element": {
+          "type": "static_select",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "How many votes per user",
+            "emoji": true
+          },
+          "initial_option": {
+            "text": {
+              "type": "plain_text",
+              "text": "One vote per user",
+              "emoji": true
+            },
+            "value": "1"
+          },
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Unlimited votes per user",
+                "emoji": true
+              },
+              "value": "0"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "One vote per user",
+                "emoji": true
+              },
+              "value": "1"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Two votes per user",
+                "emoji": true
+              },
+              "value": "2"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Three votes per user",
+                "emoji": true
+              },
+              "value": "3"
+            }
+          ],
+          "action_id": "msb/N"
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "choice_1",
+        "label": { "type": "plain_text", "text": " ", "emoji": true },
+        "optional": false,
+        "element": {
+          "type": "plain_text_input",
+          "placeholder": { "type": "plain_text", "text": "Choice #1", "emoji": true },
+          "action_id": "V6Gry"
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "choice_2",
+        "label": { "type": "plain_text", "text": " ", "emoji": true },
+        "optional": false,
+        "element": {
+          "type": "plain_text_input",
+          "placeholder": { "type": "plain_text", "text": "Choice #2", "emoji": true },
+          "action_id": "qss="
+        }
+      },
+      {
+        "type": "actions",
+        "block_id": "Sj9nD",
+        "elements": [
+          {
+            "type": "button",
+            "action_id": "tyfZ",
+            "text": { "type": "plain_text", "text": "Add Choice", "emoji": true },
+            "value": "poll:create addChoice=1"
+          }
+        ]
+      }
+    ],
+    "private_metadata": "poll:create channel=C018ETVMD0T",
+    "callback_id": "",
+    "state": {
+      "values": {
+        "end_date": { "qPC": { "type": "datepicker", "selected_date": "2020-08-01" } },
+        "vote_per_user": {
+          "msb/N": {
+            "type": "static_select",
+            "selected_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "One vote per user",
+                "emoji": true
+              },
+              "value": "1"
+            }
+          }
+        }
+      }
+    },
+    "hash": "1598825277.dJNEfO4R",
+    "title": { "type": "plain_text", "text": "New Poll", "emoji": true },
+    "clear_on_close": false,
+    "notify_on_close": false,
+    "close": { "type": "plain_text", "text": "Cancel", "emoji": true },
+    "submit": { "type": "plain_text", "text": "Post to Channel", "emoji": true },
+    "previous_view_id": null,
+    "root_view_id": "V01AFVDUWRW",
+    "app_id": "A018DC70CUD",
+    "external_id": "",
+    "app_installed_team_id": "T0194H3N84Q",
+    "bot_id": "B0194K7TZ40"
+  },
+  "channelId": null,
+  "triggerId": "1317417321975.1310581756160.f466ba4ffd556c27e72b47515fef48cc",
+  "responseUrl": null,
+  "isCommand": false,
+  "isInteraction": true,
+  "isModalSubmission": false
+}

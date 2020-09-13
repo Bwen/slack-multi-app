@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+pwd=$(pwd)
+if [[ "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]]; then
+    pwd=$1
+    shift;
+fi
+
+args="$@"
+docker run -d \
+    --rm \
+    --name slack-app \
+    --env-file .env \
+    -e NODE_ENV=development \
+    -v $pwd:/home/node/app \
+    -p 3000:3000 \
+    slack-app:latest \
+    npm $args

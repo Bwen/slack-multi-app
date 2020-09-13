@@ -1,0 +1,11 @@
+{
+  "all": true,
+  "include": [
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "config/*",
+    "src/index.js",
+    "src/slack-api-wrapper.js"
+  ]
+}

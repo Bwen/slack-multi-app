@@ -1,0 +1,27 @@
+{
+  "module": {
+    "path": [ "poll", "create" ],
+    "params": {
+      "question": "This is a test question",
+      "options": [
+        "post_anonymous",
+        "anonymous_votes",
+        "vote_change"
+      ],
+      "end_date": "2020-08-01",
+      "vote_per_user": "2",
+      "choice": [
+        "Test choice 1",
+        "Test choice 2",
+        "Test choice 3"
+      ]
+    }
+  },
+  "view": null,
+  "channelId": "C018ETVMD0T",
+  "triggerId": "1344827026497.1310581756160.49f26e69d87cd92f6aa5002fbb290588",
+  "responseUrl": null,
+  "isCommand": false,
+  "isInteraction": false,
+  "isModalSubmission": true
+}

@@ -1,0 +1,162 @@
+{
+  "type":"block_actions",
+  "user":{
+    "id":"U01880B2JB0",
+    "username":"philippe.guilbault",
+    "name":"philippe.guilbault",
+    "team_id":"T0194H3N84Q"
+  },
+  "api_app_id":"A018DC70CUD",
+  "token":"hwpd5RvPkWxkvaVAamCKOt8I",
+  "container":{
+    "type":"message",
+    "message_ts":"1597848916.032200",
+    "channel_id":"C018ETVMD0T",
+    "is_ephemeral":false
+  },
+  "trigger_id":"1314383696035.1310581756160.e42907c29e77c61fca10978b6e7ca270",
+  "team":{
+    "id":"T0194H3N84Q",
+    "domain":"smartnewbs"
+  },
+  "channel":{
+    "id":"C018ETVMD0T",
+    "name":"slack-bots"
+  },
+  "message":{
+    "type":"message",
+    "subtype":"bot_message",
+    "text":"This content can't be displayed.",
+    "ts":"1597848916.032200",
+    "username":"My Company Poll",
+    "icons":{
+      "emoji":":bar_chart:",
+      "image_64":"https:\/\/a.slack-edge.com\/80588\/img\/emoji_2017_12_06\/apple\/1f4ca.png"
+    },
+    "bot_id":"B0194K7TZ40",
+    "blocks":[
+      {
+        "type":"context",
+        "block_id":"t3o",
+        "elements":[
+          {
+            "type":"plain_text",
+            "text":"Author: philippe.guilbault",
+            "emoji":true
+          }
+        ]
+      },
+      {
+        "type":"section",
+        "block_id":"1hh",
+        "text":{
+          "type":"mrkdwn",
+          "text":"*Testing more polls thingies*",
+          "verbatim":false
+        },
+        "accessory":{
+          "type":"button",
+          "text":{
+            "type":"plain_text",
+            "text":"Poll Rules",
+            "emoji":true
+          },
+          "value":"poll:info pollId=98",
+          "action_id":"Ges9"
+        }
+      },
+      {
+        "type":"divider",
+        "block_id":"9O8D"
+      },
+      {
+        "type":"section",
+        "block_id":"Tnh",
+        "text":{
+          "type":"mrkdwn",
+          "text":":one: Oh choice one you!",
+          "verbatim":false
+        },
+        "accessory":{
+          "type":"button",
+          "action_id":"vote_98_197",
+          "text":{
+            "type":"plain_text",
+            "text":"Vote",
+            "emoji":true
+          },
+          "value":"poll:vote pollId=98&choiceId=197"
+        }
+      },
+      {
+        "type":"context",
+        "block_id":"hNq6",
+        "elements":[
+          {
+            "fallback":"24x24px image",
+            "image_url":"https:\/\/secure.gravatar.com\/avatar\/01a6edb830e5a7db5c7d65fc36ae4693.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0001-24.png",
+            "image_width":24,
+            "image_height":24,
+            "image_bytes":1628,
+            "type":"image",
+            "alt_text":"philippe.guilbault, 1 Votes"
+          },
+          {
+            "type":"mrkdwn",
+            "text":"1 votes",
+            "verbatim":false
+          }
+        ]
+      },
+      {
+        "type":"section",
+        "block_id":"X906",
+        "text":{
+          "type":"mrkdwn",
+          "text":":two: My my choice two!",
+          "verbatim":false
+        },
+        "accessory":{
+          "type":"button",
+          "action_id":"vote_98_198",
+          "text":{
+            "type":"plain_text",
+            "text":"Vote",
+            "emoji":true
+          },
+          "value":"poll:vote pollId=98&choiceId=198"
+        }
+      },
+      {
+        "type":"context",
+        "block_id":"jQL",
+        "elements":[
+          {
+            "type":"mrkdwn",
+            "text":"No votes",
+            "verbatim":false
+          }
+        ]
+      }
+    ],
+    "edited":{
+      "user":"B0194K7TZ40",
+      "ts":"1597965251.000000"
+    }
+  },
+  "response_url":"https:\/\/hooks.slack.com\/actions\/T0194H3N84Q\/1326803576961\/2kFGaNin2q1aByqSNlJB0qBY",
+  "actions":[
+    {
+      "action_id":"vote_98_198",
+      "block_id":"X906",
+      "text":{
+        "type":"plain_text",
+        "text":"Vote",
+        "emoji":true
+      },
+      "value":"poll:vote pollId=98&choiceId=198",
+      "type":"button",
+      "action_ts":"1597965286.180696"
+    }
+  ]
+}

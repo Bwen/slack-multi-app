@@ -1,0 +1,5 @@
+{
+  "name": "admin",
+  "desc": "Various commands to manage the slack app",
+  "usage": "/tt admin"
+}

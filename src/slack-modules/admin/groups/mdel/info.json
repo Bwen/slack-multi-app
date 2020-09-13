@@ -1,0 +1,5 @@
+{
+  "name": "mdel",
+  "desc": "Removes a module path access from group(s)",
+  "usage": "/tt admin:groups:mdel <module-path> <group>..."
+}

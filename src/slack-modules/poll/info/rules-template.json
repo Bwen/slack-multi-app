@@ -1,0 +1,85 @@
+{
+  "type": "modal",
+  "title": {
+    "type": "plain_text",
+    "text": "Poll Rules"
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Close"
+  },
+  "blocks": [
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*Posted anonymously:*\t:x:"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Anonymous votes:*\t:x:"
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "plain_text",
+          "text": "Is the poster anonymous and are the identity of voters kept anonymous."
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*Voting ends:*\t:x:"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Allow suggestions:*\t:x:"
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "plain_text",
+          "text": "Determines when voting ends and if users can add additional choices."
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*Allow vote change:*\t:x:"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Votes per user:*\t:x:"
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "Determines if user can change their vote and how many votes user have for the poll. If user have *unlimited votes* the users cannot change votes, *even if it is enabled!*"
+        }
+      ]
+    }
+  ]
+}

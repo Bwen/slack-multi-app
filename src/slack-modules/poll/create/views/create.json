@@ -1,0 +1,186 @@
+{
+  "type": "modal",
+  "private_metadata": "poll:create",
+  "title": {
+    "type": "plain_text",
+    "text": "New Poll"
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Post to Channel"
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Cancel"
+  },
+  "blocks": [
+    {
+      "type": "input",
+      "block_id": "question",
+      "element": {
+        "type": "plain_text_input"
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Your Poll Question"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "options",
+      "optional": true,
+      "element": {
+        "type": "checkboxes",
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Post anonymously"
+            },
+            "value": "post_anonymous"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Anonymous votes"
+            },
+            "value": "anonymous_votes"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Allow vote change"
+            },
+            "value": "vote_change"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Allow suggestions"
+            },
+            "value": "suggestion"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Options"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "end_date",
+      "element": {
+        "type": "datepicker",
+        "initial_date": "2020-08-01",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select a date"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Voting ends"
+      },
+      "hint": {
+        "type": "plain_text",
+        "text": "If date is in the past, you'll be able to vote forever"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "vote_per_user",
+      "element": {
+        "type": "static_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "How many votes per user"
+        },
+        "initial_option": {
+          "text": {
+            "type": "plain_text",
+            "text": "One vote per user"
+          },
+          "value": "1"
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Unlimited votes per user"
+            },
+            "value": "0"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "One vote per user"
+            },
+            "value": "1"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Two votes per user"
+            },
+            "value": "2"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Three votes per user"
+            },
+            "value": "3"
+          }
+        ]
+      },
+      "label": {
+        "type": "plain_text",
+        "text": " "
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "choice_1",
+      "element": {
+        "type": "plain_text_input",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Choice #1"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": " "
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "choice_2",
+      "element": {
+        "type": "plain_text_input",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Choice #2"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": " "
+      }
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Add Choice"
+          },
+          "value": "poll:create addChoice=1"
+        }
+      ]
+    }
+  ]
+}

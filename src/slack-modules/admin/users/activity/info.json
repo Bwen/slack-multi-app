@@ -1,0 +1,5 @@
+{
+  "name": "activity",
+  "desc": "Lists users' recent activity",
+  "usage": "/tt admin:users:activity <filters>"
+}

@@ -1,0 +1,14 @@
+{
+  "token": "hwpd5RvPkWxkvaVAamCKOt8I",
+  "team_id": "T0194H3N84Q",
+  "team_domain": "smartnewbs",
+  "channel_id": "C018ETVMD0T",
+  "channel_name": "slack-bots",
+  "user_id": "U01880B2JB0",
+  "user_name": "some.username",
+  "command": "/tt",
+  "text": "poll:create",
+  "api_app_id": "A018DC70CUD",
+  "response_url": "https://hooks.slack.com/commands/T0194H3N84Q/1307426683910/gs8cONBuwHm4ABB2EIkazqKI",
+  "trigger_id": "1299414370183.1310581756160.71911dbd4f23e69eade292b0fc249ab8"
+}

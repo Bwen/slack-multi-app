@@ -1,0 +1,16 @@
+{
+  "type": "input",
+  "block_id": "choice_",
+  "element": {
+    "type": "plain_text_input",
+    "placeholder": {
+      "type": "plain_text",
+      "text": "Choice #"
+    }
+  },
+  "label": {
+    "type": "plain_text",
+    "text": " ",
+    "emoji": true
+  }
+}

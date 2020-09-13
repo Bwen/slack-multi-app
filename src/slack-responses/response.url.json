@@ -1,0 +1,8 @@
+{
+  "type": "response.url",
+  "responseType": "json",
+  "json": {
+    "replace_original": false,
+    "blocks":  []
+  }
+}

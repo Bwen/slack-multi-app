@@ -1,0 +1,5 @@
+{
+  "name": "madd",
+  "desc": "Grants access to a module-path for group(s)",
+  "usage": "/tt admin:groups:madd <module-path> <group>..."
+}

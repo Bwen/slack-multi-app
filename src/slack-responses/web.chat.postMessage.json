@@ -1,0 +1,8 @@
+{
+  "type": "web.chat.postMessage",
+  "text": "Posting message to channel",
+  "channel": null,
+  "icon_emoji": null,
+  "username": null,
+  "blocks": []
+}

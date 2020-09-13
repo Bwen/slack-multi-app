@@ -1,0 +1,5 @@
+{
+  "name": "gadd",
+  "desc": "Add a user to group(s)",
+  "usage": "/tt admin:users:gadd <@user> <group>..."
+}

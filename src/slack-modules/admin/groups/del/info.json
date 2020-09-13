@@ -1,0 +1,5 @@
+{
+  "name": "del",
+  "desc": "Removes a group(s)",
+  "usage": "/tt admin:groups:del <group>..."
+}

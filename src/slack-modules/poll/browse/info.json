@@ -1,0 +1,5 @@
+{
+  "name": "browse",
+  "desc": ["Browse your previous polls"],
+  "usage": ["/tt poll:browse"]
+}

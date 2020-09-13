@@ -1,0 +1,5 @@
+{
+  "name": "add",
+  "desc": "Creates a new group",
+  "usage": "/tt admin:groups:add <group> <description>"
+}
