@@ -18,7 +18,7 @@ it does not exist it will create an entry and make a call to Slack API to retrie
 information and store it in **_user_profiles_**.
 
 Once it is created/found it will store the [Sequelize](https://sequelize.org/) User model
-in the `req.currentUser`. Which will be passed to the [Slack Module](./src/slack-modules/README.md)'s functions
+in the `req.currentUser`. Which will be passed to the [Slack Module](../slack-modules/README.md)'s functions
 by the [src/utils.js:processRequest()](../utils.js).
 
 #### Slack Module Path
@@ -62,7 +62,7 @@ The params in the string/path are a normal query string which is deconstructed i
 multiple arguments it is deconstructed into `req.slack.module.params.values` array.
 
 Once it is constructed it will store it in `req.slack`. Which will be passed to the 
-[Slack Module](./src/slack-modules/README.md)'s functions by [src/utils.js:processRequest()](../utils.js).
+[Slack Module](../slack-modules/README.md)'s functions by [src/utils.js:processRequest()](../utils.js).
 
 #### Slack User Activity
 Tasked to track all user activity, logs them in the table **user_activities**. 
@@ -105,12 +105,14 @@ Here is an example of a `info.json` for the Poll Create command:
 ``` 
 
 Which appears like so in slack:
+
 ![poll create command](../../.github/images/poll-slash-cmd.png)
 As you can see, the properties `desc` and `usage` are array to give examples on how to
 use the command correctly.
 
 When the command is not found, for example `poll:creato` it will stop the process and
 give the available commands for the command's path depth:
+
 ![PolL Create Invlid](../../.github/images/poll-create-invalid.png)
 
 Otherwise it will just let the module flow through the middlewares

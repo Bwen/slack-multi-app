@@ -19,6 +19,7 @@ If you have too many erratic commits *we will ask you* to rebase all your commit
 We follow the javascript standard [Airbnb](https://github.com/airbnb/javascript).
 You dont have to really read the whole thing, you can setup your IDE (phpstorm)
 correctly to guide you through as you code:
+
 ![Phpstorm Eslint setup](./.github/images/slack-bot-phpstorm-eslint.png)
 
 ## Tests
