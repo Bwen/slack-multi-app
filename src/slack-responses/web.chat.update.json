@@ -1,0 +1,7 @@
+{
+  "type": "web.chat.update",
+  "channel": null,
+  "ts": 0,
+  "text": "Updating message to channel",
+  "blocks": []
+}

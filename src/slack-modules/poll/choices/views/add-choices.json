@@ -1,0 +1,34 @@
+{
+  "type": "modal",
+  "private_metadata": "poll:choices",
+  "title": {
+    "type": "plain_text",
+    "text": "Add Choices",
+    "emoji": true
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Add",
+    "emoji": true
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Cancel",
+    "emoji": true
+  },
+  "blocks": [
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Add one more Choice"
+          },
+          "value": "poll:choices add_more=1"
+        }
+      ]
+    }
+  ]
+}

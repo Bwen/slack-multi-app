@@ -1,6 +1,6 @@
 .idea
 .nyc_output/
-coverage/
+coverage/*
 node_modules/
 test/data/*
 .env

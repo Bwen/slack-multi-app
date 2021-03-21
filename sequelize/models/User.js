@@ -1,5 +1,5 @@
 const { Model } = require('sequelize');
-const { getSlackApi } = require('../../src/slack-api-wrapper');
+const { getSlackApi } = require('../../src/wrapper-slack-api');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {

@@ -102,17 +102,19 @@ bin/sequelize migrate:status
 ## Without Docker
 You will need install [NodeJS](https://nodejs.org/) locally and the following packages globally:
 ```bash
-npm install -g nodemon sequelize-cli
+sudo apt install sqlite3
+
+npm install -g coveralls nyc nodemon sequelize-cli
 npm install
 
-// Start the server in dev mode
+// Run the linter
 npm run lint
 
-// Start the server in dev mode
+// Run the tests
 npm run test
 
 // Check migration status
-sequelize migrate:status
+sequelize db:migrate:status
 
 // Start the server in dev mode
 npm run dev

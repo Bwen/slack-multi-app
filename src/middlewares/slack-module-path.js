@@ -118,6 +118,10 @@ function getCoreProperties(payload) {
     coreProperties.responseUrl = payload.response_url;
   }
 
+  if (Object.prototype.hasOwnProperty.call(payload, 'responseUrl')) {
+    coreProperties.responseUrl = payload.responseUrl;
+  }
+
   if (Object.prototype.hasOwnProperty.call(payload, 'channel_id')) {
     coreProperties.channelId = payload.channel_id;
   }
@@ -128,6 +132,10 @@ function getCoreProperties(payload) {
     } else {
       coreProperties.channelId = payload.channel;
     }
+  }
+
+  if (Object.prototype.hasOwnProperty.call(payload, 'container') && Object.prototype.hasOwnProperty.call(payload.container, 'message_ts')) {
+    coreProperties.messageTS = payload.container.message_ts;
   }
 
   return coreProperties;
@@ -143,6 +151,7 @@ module.exports = (req, res, next) => {
   req.slack.module = { path: [], params: {} };
   req.slack.view = null;
   req.slack.channelId = null;
+  req.slack.messageTS = 0;
   req.slack.triggerId = null;
   req.slack.responseUrl = null;
   req.slack.isCommand = false;

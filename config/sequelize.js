@@ -24,7 +24,7 @@ module.exports = {
     migrationStorageTableName: '_migrations',
     seederStorage: 'sequelize',
     seederStorageTableName: '_seeders',
-    logging: (msg) => logger.info(msg),
+    logging: false,
   },
   production: {
     dialect: 'mysql',
@@ -32,6 +32,6 @@ module.exports = {
     migrationStorageTableName: '_migrations',
     seederStorage: 'sequelize',
     seederStorageTableName: '_seeders',
-    logging: (msg) => logger.info(msg),
+    logging: false,
   },
 };

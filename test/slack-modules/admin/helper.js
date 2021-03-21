@@ -1,5 +1,5 @@
 const db = require('../../../sequelize');
-const { createSlackUser } = require('../../utils');
+// const { createSlackUser } = require('../../utils');
 
 async function createGroup(options = {}) {
   // eslint-disable-next-line no-unused-vars

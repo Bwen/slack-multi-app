@@ -6,6 +6,6 @@
   "exclude": [
     "config/*",
     "src/index.js",
-    "src/slack-api-wrapper.js"
+    "src/wrapper-slack-api.js"
   ]
 }

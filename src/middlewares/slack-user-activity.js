@@ -3,6 +3,10 @@ const db = require('../../sequelize');
 
 const logPrefix = 'middleware-user-activity: ';
 module.exports = () => async (req, res, next) => {
+  if (req.currentUser === undefined) {
+    return next();
+  }
+
   const params = new URLSearchParams(req.slack.module.params);
   req.lastActivity = await db.UserActivity.findOne({
     where: {
@@ -26,5 +30,5 @@ module.exports = () => async (req, res, next) => {
   });
 
   logger.info(`${logPrefix}Logged activity ${req.slack.module.path.join(':')}`);
-  next();
+  return next();
 };
