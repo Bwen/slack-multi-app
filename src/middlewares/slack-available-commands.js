@@ -1,4 +1,3 @@
-const got = require('got');
 const fs = require('fs');
 const path = require('path');
 const { readdir } = require('fs').promises;
@@ -61,7 +60,7 @@ function getModuleInfos(list, depth = 0) {
 
 const logPrefix = 'middleware-available-commands: ';
 module.exports = async (req, res, next) => {
-  if (!req.slack) {
+  if (!req.slack || req.path === '/healthcheck') {
     logger.warn('req.slack is not set!');
     next();
     return false;

@@ -43,7 +43,7 @@ describe('slack-modules poll:vote interactions', () => {
 
     // Remove vote choice
     // eslint-disable-next-line prefer-destructuring
-    slackReq.module.params.choiceId = choiceIds[0];
+    slackReq.module.params.choiceId = choiceIds[0].toString();
     await vote(slackUser, slackReq);
     votes = await db.PollVote.findAll({ where: { createdBy: slackUser.id } });
     assert.equal(votes.length, 0);

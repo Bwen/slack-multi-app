@@ -16,7 +16,7 @@ async function quickCreate(slackUser, params) {
     createdBy: slackUser.id,
     endDate: null,
     postAnonymous: 'no',
-    anonymousVotes: 'no',
+    anonymousVotes: 'yes',
     voteChange: 'no',
     suggestion,
     votePerUser: 1,

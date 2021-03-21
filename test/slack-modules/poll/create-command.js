@@ -53,7 +53,7 @@ describe('slack-modules poll:create (quick-create)', () => {
     assert.equal(poll.PollChoices[1].text, choice2);
     assert.equal(poll.endDate, null);
     assert.equal(poll.postAnonymous, 'no');
-    assert.equal(poll.anonymousVotes, 'no');
+    assert.equal(poll.anonymousVotes, 'yes');
     assert.equal(poll.voteChange, 'no');
     assert.equal(poll.votePerUser, 1);
     assert.equal(poll.suggestion, 'no');

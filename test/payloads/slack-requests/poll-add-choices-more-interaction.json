@@ -1,0 +1,53 @@
+{
+  "module": { "path": [ "poll", "choices" ], "params": { "add_more": "1" } },
+  "view": {
+    "id": "V01HVMLSMMG",
+    "team_id": "T0194H3N84Q",
+    "type": "modal",
+    "blocks": [
+      {
+        "type": "input",
+        "block_id": "choice_1",
+        "label": { "type": "plain_text", "text": " ", "emoji": true },
+        "optional": false,
+        "dispatch_action": false,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "GGmLj"
+        }
+      },
+      {
+        "type": "actions",
+        "block_id": "4r0A",
+        "elements": [
+          {
+            "type": "button",
+            "action_id": "u=g/",
+            "text": { "type": "plain_text", "text": "Add one more Choice", "emoji": true },
+            "value": "poll:choices add_more=1"
+          }
+        ]
+      }
+    ],
+    "private_metadata": "poll:choices pollId=5&responseUrl=https://hooks.slack.com/actions/T0194H3N84Q/1613898865572/SiCGd8V8FHf2485nd05uZrBV",
+    "callback_id": "",
+    "hash": "1609537358.kClh5MjK",
+    "title": { "type": "plain_text", "text": "Add Choices", "emoji": true },
+    "clear_on_close": false,
+    "notify_on_close": false,
+    "close": { "type": "plain_text", "text": "Cancel", "emoji": true },
+    "submit": { "type": "plain_text", "text": "Add", "emoji": true },
+    "previous_view_id": null,
+    "root_view_id": "V01HVMLSMMG",
+    "app_id": "A018DC70CUD",
+    "external_id": "",
+    "app_installed_team_id": "T0194H3N84Q",
+    "bot_id": "B0194K7TZ40"
+  },
+  "channelId": null,
+  "triggerId": "1607734939874.1310581756160.b70f76dfd8fdbd6b6085c46cd4d3fa28",
+  "responseUrl": null,
+  "isCommand": false,
+  "isInteraction": true,
+  "isModalSubmission": false
+}

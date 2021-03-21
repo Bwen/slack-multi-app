@@ -1,6 +1,6 @@
 const db = require('../../../../sequelize');
 const { generatePollBlocks } = require('../helper');
-const responsePostUrl = require('../../../slack-responses/response.url.json');
+const messageUpdate = require('../../../slack-responses/web.chat.update.json');
 
 async function updateVote(poll, choiceId, currentUserId) {
   let canVote = true;
@@ -25,7 +25,7 @@ async function updateVote(poll, choiceId, currentUserId) {
       // If we allowed to change vote we remove the current vote if any
       if (poll.voteChange === 'yes') {
         votes.forEach((vote) => {
-          if (vote.choiceId === choiceId) {
+          if (parseInt(vote.choiceId, 10) === parseInt(choiceId, 10)) {
             vote.destroy();
           }
         });
@@ -51,8 +51,6 @@ module.exports = async (slackUser, slackReq) => {
   });
 
   await updateVote(poll, slackReq.module.params.choiceId, slackUser.id);
-  const blocks = await generatePollBlocks(poll.id);
-  responsePostUrl.json.replace_original = true;
-  responsePostUrl.json.blocks = blocks;
-  return responsePostUrl;
+  messageUpdate.blocks = await generatePollBlocks(poll.id);
+  return messageUpdate;
 };

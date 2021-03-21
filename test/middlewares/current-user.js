@@ -2,7 +2,7 @@
 const mock = require('mock-require');
 
 let profileCalled = false;
-mock('../../src/slack-api-wrapper.js', {
+mock('../../src/wrapper-slack-api.js', {
   getSlackApi: () => ({
     users: {
       profile: {

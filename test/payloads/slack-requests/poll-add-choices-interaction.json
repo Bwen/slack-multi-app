@@ -1,0 +1,10 @@
+{
+  "module": { "path": [ "poll", "choices" ], "params": { "add": "1", "pollId": "5" } },
+  "view": null,
+  "channelId": "G01J1FF8QGL",
+  "triggerId": "1607911261875.1310581756160.39c3c3e29eb55951cea63ec6903e29f8",
+  "responseUrl": "https://hooks.slack.com/actions/T0194H3N84Q/1620335823745/4LuiydVXlATC6JYbFc54OieW",
+  "isCommand": false,
+  "isInteraction": true,
+  "isModalSubmission": false
+}

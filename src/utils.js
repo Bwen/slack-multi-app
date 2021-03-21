@@ -5,7 +5,7 @@ const logger = require('./logger');
 const { dataList } = require('./renderer');
 const modalErrorValidation = require('./slack-modals/errors/validation.json');
 const { ValidationError } = require('./errors/validation');
-const { getSlackApi } = require('./slack-api-wrapper');
+const { getSlackApi } = require('./wrapper-slack-api');
 
 const web = getSlackApi();
 const slackModulesPath = path.resolve(__dirname, 'slack-modules');
@@ -57,6 +57,11 @@ async function processSlackResponse(req, res, response) {
         delete response.type;
         response.channel = req.slack.channelId;
         result = await web.chat.postMessage(response);
+      } else if (response.type === 'web.chat.update') {
+        delete response.type;
+        response.channel = req.slack.channelId;
+        response.ts = req.slack.messageTS;
+        result = await web.chat.update(response);
       }
     } else if (response.type && response.type === 'response.url') {
       delete response.type;
