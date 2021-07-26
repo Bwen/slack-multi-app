@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:14-alpine
 
 ENV HOME_DIR /home/node/app
 WORKDIR $HOME_DIR
@@ -15,6 +15,7 @@ RUN npm install --production
 COPY config $HOME_DIR/config
 COPY sequelize $HOME_DIR/sequelize
 COPY src $HOME_DIR/src
+COPY public $HOME_DIR/public
 COPY .sequelizerc $HOME_DIR/
 RUN chown node:node * -R
 

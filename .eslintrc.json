@@ -1,11 +1,17 @@
 {
   "extends": "airbnb",
+  "ignorePatterns": [ "test/*"],
   "overrides": [
     {
       "files": ["*"],
       "rules": {
         "import/no-dynamic-require": "off",
-        "global-require": "off"
+        "global-require": "off",
+        "max-len": "off",
+        "no-restricted-syntax": "off",
+        "no-continue": "off",
+        "no-await-in-loop": "off",
+        "no-return-await": "off"
       }
     }
   ]

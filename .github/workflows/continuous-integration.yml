@@ -1,0 +1,62 @@
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+name: Continuous Integration
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            node-
+
+      - uses: actions/setup-node@v2
+        name: Use Node.js
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - run: npm install
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          eslint: true
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            node-
+
+      - uses: actions/setup-node@v2
+        name: Use Node.js
+        with:
+          node-version: '14'
+          cache: 'npm'
+
+      - run: sudo apt-get install sqlite3
+      - run: npm install -g coveralls nyc sequelize-cli
+      - run: npm install
+      - run: npm run test
+      - run: npm run coverage
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

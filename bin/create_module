@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+function join_by { local IFS="$1"; shift; echo "$*"; }
+
+if [ -z "$1" ] ; then
+  echo "Missing module name as first argument, ex: $0 admin:users"
+  exit 1;
+fi
+
+module_name=$1
+module_path="./src/slack-modules";
+parts=(${module_name//:/ })
+length=${#parts[@]}
+mkdir -p "$module_path/$(printf "/%s" "${parts[@]}")"
+
+echo
+path=()
+current=0
+for i in "${parts[@]}"
+do
+  current=$((current + 1))
+  path+=("${i}")
+  module_path="${module_path}/$i"
+  module_info_path="${module_path}/info.json"
+  module_command_path="${module_path}/command.js"
+  if [ ! -f "${module_info_path}" ]; then
+    if [[ "$current" -eq "$length" ]]; then
+      cp "./bin/templates/command_template.js" "${module_command_path}"
+      sed -i "s/~path~/$(join_by : ${path[@]})/" "${module_command_path}"
+      echo "Created ${module_command_path}"
+    fi
+
+    cp "./bin/templates/module_template.json" "${module_info_path}"
+    sed -i "s/~folder~/${i}/" "${module_info_path}"
+    sed -i "s/~path~/$(join_by : ${path[@]})/" "${module_info_path}"
+    echo "Created ${module_info_path}"
+  fi
+done
+
+echo
+echo "Dont forget to change the description in your info.json files"
