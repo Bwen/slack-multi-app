@@ -11,7 +11,7 @@ async function getFiles(dir) {
     return dirent.isDirectory() ? getFiles(res) : res;
   }));
 
-  files = files.filter((file) => file.toString().match(/command.js|interactions.js|modal-submit.js|info.json$/));
+  files = files.filter((file) => file.toString().match(/\/(command.js|interactions.js|modal-submit.js|info.json)$/));
   return Array.prototype.concat(...files);
 }
 
@@ -28,7 +28,7 @@ async function getModuleList() {
   files.forEach((file) => {
     const parts = file
       .replace(slackModulesPath.toString(), '')
-      .replace(/command.js|interactions.js|modal-submit.js|info.json$/, '')
+      .replace(/\/(command.js|interactions.js|modal-submit.js|info.json)$/, '')
       .split(path.sep).filter((i) => i);
 
     // Avoid duplicates in the list, since we look for many files
@@ -60,10 +60,16 @@ function getModuleInfos(list, depth = 0) {
 
 const logPrefix = 'middleware-available-commands: ';
 module.exports = async (req, res, next) => {
-  if (!req.slack || req.path === '/healthcheck') {
+  if (!req.slack) {
     logger.warn('req.slack is not set!');
     next();
     return false;
+  }
+
+  // If its not a command we can skip this middleware
+  if (!req.slack.isCommand) {
+    next();
+    return true;
   }
 
   let list = await getModuleList();
@@ -81,12 +87,14 @@ module.exports = async (req, res, next) => {
 
   if (!list.length) {
     logger.info(`${logPrefix}Module path not found: ${req.slack.module.path.join(':')}`);
+
     // Reset the list to one less depth
     list = await getModuleList();
     req.slack.module.path.pop();
     req.slack.module.path.forEach((part, i) => {
       list = list.filter((item) => item[i] === part);
     });
+
     const data = getModuleInfos(list, req.slack.module.path.length);
     data.unshift(['Command', 'Group', 'Description', 'Usage']);
     moduleNotFound(res, req.slack, data);

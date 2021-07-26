@@ -1,3 +1,4 @@
+const querystring = require('querystring');
 const logger = require('../logger');
 const { splitWhitespace } = require('../utils');
 
@@ -20,19 +21,24 @@ function parseSlackEntity(entity) {
  * @param item
  * @returns {string|null|[]|*}
  */
-function getModalValue(item) {
-  const propName = Object.keys(item)[0];
-  if (Object.prototype.hasOwnProperty.call(item[propName], 'selected_date')) {
-    return item[propName].selected_date;
+function getValueFrom(item) {
+  if (Object.prototype.hasOwnProperty.call(item, 'selected_date')) {
+    return item.selected_date;
   }
 
-  if (Object.prototype.hasOwnProperty.call(item[propName], 'selected_option')) {
-    return item[propName].selected_option.value;
+  if (Object.prototype.hasOwnProperty.call(item, 'selected_time')) {
+    return item.selected_time;
   }
 
-  if (Object.prototype.hasOwnProperty.call(item[propName], 'selected_options')) {
+  if (Object.prototype.hasOwnProperty.call(item, 'selected_option')
+      && item.selected_option
+      && Object.prototype.hasOwnProperty.call(item.selected_option, 'value')) {
+    return item.selected_option.value;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(item, 'selected_options')) {
     const values = [];
-    const options = item[propName].selected_options;
+    const options = item.selected_options;
     for (let i = 0; i < options.length; i += 1) {
       values.push(options[i].value);
     }
@@ -40,8 +46,12 @@ function getModalValue(item) {
     return values;
   }
 
-  if (Object.prototype.hasOwnProperty.call(item[propName], 'value')) {
-    return item[propName].value;
+  if (Object.prototype.hasOwnProperty.call(item, 'selected_users')) {
+    return item.selected_users;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(item, 'value')) {
+    return item.value;
   }
 
   return null;
@@ -49,18 +59,24 @@ function getModalValue(item) {
 
 /**
  * If the field name (block_id) ends with an underscore and a number
- * it will be split into an array of values
+ * it will be split into an array of values.
+ *
+ * Also all module paths from inputs will be stripped
  *
  * @param params
  * @returns {{}}
  */
 function convertValueArray(params) {
   const newParams = {};
-  // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of Object.entries(params)) {
     if (!key.match(/_[0-9]+$/)) {
       newParams[key] = value;
-      // eslint-disable-next-line no-continue
+
+      // Strip module path from value if any
+      if (newParams[key] && typeof newParams[key] === 'string') {
+        newParams[key] = value.replace(/^([a-zA-Z0-9]+:.*? )/i, '');
+      }
+
       continue;
     }
 
@@ -75,22 +91,23 @@ function convertValueArray(params) {
   return newParams;
 }
 
-function getPathParams(parts) {
+function getPathParams(modulePathString) {
+  const parts = splitWhitespace(modulePathString);
+
+  // Remove the module path, which is always first
+  parts.shift();
+
   let params = {};
   for (let i = 0; i < parts.length; i += 1) {
-    const value = parts[i];
+    const value = parts[i].replace(/^"/, '').replace(/"$/, '');
     if (value.match(/[a-z0-9._-]+=/i)) {
-      const searchParams = new URLSearchParams(parts.shift());
-      params = Object.assign(
-        params,
-        Object.fromEntries(searchParams),
-      );
+      params = Object.assign(params, querystring.parse(value));
     } else {
       if (!Object.prototype.hasOwnProperty.call(params, 'values')) {
         params.values = [];
       }
 
-      params.values.push(value.replace(/^"/, '').replace(/"$/, ''));
+      params.values.push(value);
     }
   }
 
@@ -107,7 +124,48 @@ function getPathParams(parts) {
   return params;
 }
 
-function getCoreProperties(payload) {
+function normalizeValues(key, value) {
+  const params = [];
+  // If we have a query string as a value we parse it
+  if (typeof value === 'string' && value.match(/[&=]/)) {
+    // Strip module path from value if any
+    let normalizedValue = value.replace(/^([a-zA-Z0-9]+:.*? )/i, '');
+    normalizedValue = value.replace(/"/g, '');
+
+    const qs = querystring.parse(normalizedValue);
+    for (const [k, v] of Object.entries(qs)) {
+      params[k] = v;
+    }
+  } else {
+    params[key] = value;
+  }
+
+  return params;
+}
+
+function convertStateToParams(state) {
+  const { values } = state;
+  const params = {};
+
+  for (const [key, value] of Object.entries(values)) {
+    const keys = Object.keys(value);
+    if (keys.length > 1) {
+      params[key] = {};
+      for (const [k, v] of Object.entries(value)) {
+        const normalizedValues = normalizeValues(k, getValueFrom(v));
+
+        Object.assign(params[key], normalizedValues);
+      }
+      continue;
+    }
+
+    Object.assign(params, normalizeValues(key, getValueFrom(value[keys[0]])));
+  }
+
+  return params;
+}
+
+function getCallbackProperties(payload) {
   const coreProperties = {};
 
   if (Object.prototype.hasOwnProperty.call(payload, 'trigger_id')) {
@@ -134,6 +192,10 @@ function getCoreProperties(payload) {
     }
   }
 
+  if (Object.prototype.hasOwnProperty.call(payload, 'messageTS')) {
+    coreProperties.messageTS = payload.messageTS;
+  }
+
   if (Object.prototype.hasOwnProperty.call(payload, 'container') && Object.prototype.hasOwnProperty.call(payload.container, 'message_ts')) {
     coreProperties.messageTS = payload.container.message_ts;
   }
@@ -141,70 +203,128 @@ function getCoreProperties(payload) {
   return coreProperties;
 }
 
+function getDefaultSlack() {
+  return {
+    module: { path: [], params: {} },
+    view: null,
+    channelId: null,
+    messageTS: 0,
+    triggerId: null,
+    responseUrl: null,
+    isRaw: false,
+    isCommand: false,
+    isInteraction: false,
+    isModalSubmission: false,
+  };
+}
+
+function getSlackPayload(req) {
+  if (req.body && req.body.payload !== undefined) {
+    return JSON.parse(req.body.payload);
+  }
+
+  return {};
+}
+
+function getCoreProperties(req, slackPayload, pathParams) {
+  let coreProperties = {};
+  if (slackPayload.actions && slackPayload.actions.length) {
+    coreProperties.isInteraction = true;
+  } else if (slackPayload.view && slackPayload.view.private_metadata) {
+    coreProperties.isModalSubmission = true;
+  } else if (req.body.text !== undefined) {
+    coreProperties.isCommand = true;
+  } else if (req.url.match(/\//g).length > 1) {
+    coreProperties.isRaw = true;
+  }
+
+  coreProperties = Object.assign(coreProperties, getCallbackProperties(slackPayload));
+  coreProperties = Object.assign(coreProperties, getCallbackProperties(req.body));
+  coreProperties = Object.assign(coreProperties, getCallbackProperties(pathParams));
+
+  if (slackPayload.actions && slackPayload.actions.length && slackPayload.view) {
+    coreProperties.view = slackPayload.view;
+  }
+
+  return coreProperties;
+}
+
+function getModulePathString(req, slackPayload) {
+  if (req.url && req.url.match(/\//g).length > 1) {
+    const url = new URL(req.url, 'https://temp.tmp');
+    return url.pathname.split('/').filter((v) => v != null && v !== '').join(':');
+  }
+
+  if (req.body.text !== undefined) {
+    return req.body.text;
+  }
+
+  if (slackPayload.actions && slackPayload.actions.length) {
+    if (Object.prototype.hasOwnProperty.call(slackPayload.actions[0], 'selected_option')) {
+      return slackPayload.actions[0].selected_option.value;
+    }
+
+    return slackPayload.actions[0].value;
+  }
+
+  if (slackPayload.view && slackPayload.view.private_metadata) {
+    return slackPayload.view.private_metadata;
+  }
+
+  return '';
+}
+
+function getModulePathParts(req, modulePathString) {
+  const parts = splitWhitespace(modulePathString);
+  if (!parts.length) {
+    return [];
+  }
+
+  return parts.shift().split(':');
+}
+
+function getSlackModuleParams(req, slackPayload, pathParams) {
+  let params = {};
+  if (req.query) {
+    params = req.query;
+  }
+
+  if (slackPayload.view) {
+    params = Object.assign(params, convertStateToParams(slackPayload.view.state));
+  } else if (slackPayload.state) {
+    params = Object.assign(params, convertStateToParams(slackPayload.state));
+  }
+
+  // Check if we have params in private_metadata we add them
+  if (slackPayload.view && slackPayload.view.private_metadata) {
+    params = Object.assign(params, getPathParams(slackPayload.view.private_metadata));
+  }
+
+  params = Object.assign(params, pathParams);
+
+  // Remove core properties
+  delete params.channel;
+  delete params.channelId;
+  delete params.messageTS;
+  delete params.triggerId;
+  delete params.responseUrl;
+
+  return convertValueArray(params);
+}
+
 const logPrefix = 'middleware-slack-module-path: ';
 module.exports = (req, res, next) => {
-  if (!req.slack) {
-    req.slack = {};
-  }
+  try {
+    req.slack = getDefaultSlack();
+    const slackPayload = getSlackPayload(req);
+    const modulePathString = getModulePathString(req, slackPayload);
+    const pathParams = getPathParams(modulePathString);
 
-  let modulePath = '';
-  req.slack.module = { path: [], params: {} };
-  req.slack.view = null;
-  req.slack.channelId = null;
-  req.slack.messageTS = 0;
-  req.slack.triggerId = null;
-  req.slack.responseUrl = null;
-  req.slack.isCommand = false;
-  req.slack.isInteraction = false;
-  req.slack.isModalSubmission = false;
-  if (req.body) {
-    if (req.body.payload !== undefined) {
-      try {
-        const payload = JSON.parse(req.body.payload);
-        req.slack = Object.assign(req.slack, getCoreProperties(payload));
-
-        if (payload.actions && payload.actions.length) {
-          modulePath = payload.actions[0].value;
-          req.slack.isInteraction = true;
-          req.slack.view = payload.view;
-        } else if (payload.view && payload.view.private_metadata) {
-          modulePath = payload.view.private_metadata;
-          req.slack.isModalSubmission = true;
-        }
-      } catch (error) {
-        logger.error(error);
-      }
-    } else if (req.body.text !== undefined) {
-      modulePath = req.body.text;
-      req.slack.isCommand = true;
-      req.slack = Object.assign(req.slack, getCoreProperties(req.body));
-    }
-  }
-
-  const parts = splitWhitespace(modulePath);
-  if (parts.length) {
-    req.slack.module.path = parts.shift().split(':');
-
-    const pathParams = getPathParams(parts);
-    req.slack = Object.assign(req.slack, getCoreProperties(pathParams, true));
-    delete pathParams.channel;
-    delete pathParams.channelId;
-    delete pathParams.triggerId;
-    delete pathParams.responseUrl;
-
-    if (req.slack.isInteraction || req.slack.isCommand) {
-      req.slack.module.params = convertValueArray(pathParams);
-    } else if (req.slack.isModalSubmission) {
-      const payload = JSON.parse(req.body.payload);
-      const { values } = payload.view.state;
-      // eslint-disable-next-line no-restricted-syntax
-      for (const [key, value] of Object.entries(values)) {
-        req.slack.module.params[key] = getModalValue(value);
-      }
-
-      req.slack.module.params = Object.assign(req.slack.module.params, pathParams);
-      req.slack.module.params = convertValueArray(req.slack.module.params);
-    }
+    req.slack = Object.assign(req.slack, getCoreProperties(req, slackPayload, pathParams));
+    req.slack.module.path = getModulePathParts(req, modulePathString);
+    req.slack.module.params = getSlackModuleParams(req, slackPayload, pathParams);
+  } catch (error) {
+    logger.error(error);
   }
 
   logger.info(`${logPrefix}Loaded slack path: ${JSON.stringify(req.slack.module)}`);

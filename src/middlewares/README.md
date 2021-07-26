@@ -5,12 +5,17 @@ As you can see in the [index.js](./src/index.js) there are five middlewares to s
 things for the [module system](../slack-modules/README.md). The order in which they are being
 executed matters and is the following:
 ```javascript
+app.use(slackSignatureCheck());
 app.use(currentUser());
 app.use(slackModulePath);
 app.use(slackUserActivity());
 app.use(slackGroupACL());
 app.use(slackAvailableCommands);
 ```
+
+#### Slack signature check
+Tasked to verify that all requests really comes from Slack. It also will verify if the query string `eqs` (_encrypted query string_) is present,
+and will unencrypt it and let the request proceed normally.
 
 #### Current User
 Tasked with looking up the current slack users (_Slack ID_) in the **_users_** table, if
@@ -19,7 +24,7 @@ information and store it in **_user_profiles_**.
 
 Once it is created/found it will store the [Sequelize](https://sequelize.org/) User model
 in the `req.currentUser`. Which will be passed to the [Slack Module](../slack-modules/README.md)'s functions
-by the [src/utils.js:processRequest()](../utils.js).
+by the [src/utils.js:processSlackRequest()](../utils.js).
 
 #### Slack Module Path
 Tasked to construct the `req.slack` objects which contains multiple information from the Slack payload

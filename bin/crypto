@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+const version = require('../package').version;
+const yargs = require('yargs/yargs')
+const { hideBin } = require('yargs/helpers')
+const argv = yargs(hideBin(process.argv))
+    .usage('Usage: $0 [options]')
+    .example('$0 -d a6cb591974c10.abd741839e9dfb', 'decrypt string')
+    .example('$0 -e "String to encrypt"', 'encrypt string')
+    .option('decrypt', {
+        alias: 'd',
+        describe: 'Decrypt the given string'
+    })
+    .option('encrypt', {
+        alias: 'e',
+        describe: 'Encrypt the given string'
+    })
+    .version(version)
+    .argv
+
+const { encrypt, decrypt } = require('../src/crypto');
+if (argv.decrypt) {
+    console.log(decrypt(argv.decrypt));
+    return process.exit(0);
+} else if (argv.encrypt) {
+    const hash = encrypt(argv.encrypt);
+    console.log(hash);
+    return process.exit(0);
+}
+
+process.exit(1);
