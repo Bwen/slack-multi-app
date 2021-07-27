@@ -1,13 +1,14 @@
 const db = require(`${process.env.root}/sequelize`);
 
-const MODULE_PATH = 'admin:users:activity';
+// const MODULE_PATH = 'admin:users:activity';
 const ENTRIES_LIMIT = 20;
-function validateAndParse(values) {
-  return values;
-}
+// function validateAndParse(values) {
+//   return values;
+// }
 
+// eslint-disable-next-line no-unused-vars
 module.exports = async (slackUser, slackReq) => {
-  const filters = validateAndParse(slackReq.module.params.values);
+  // const filters = validateAndParse(slackReq.module.params.values);
   const { count, rows } = await db.UserActivity.findAndCountAll({
     attributes: ['path', 'params', 'createdAt', 'createdBy'],
     include: [{

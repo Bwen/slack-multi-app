@@ -1,0 +1,34 @@
+{
+  "type": "modal",
+  "private_metadata": "agile:pulse:browse modifyMembers=1",
+  "title": {
+    "type": "plain_text",
+    "text": "Modify Members"
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Submit"
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Cancel"
+  },
+  "blocks": [
+    {
+      "type": "input",
+      "block_id": "members",
+      "element": {
+        "type": "multi_users_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select users",
+          "emoji": true
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": " "
+      }
+    }
+  ]
+}

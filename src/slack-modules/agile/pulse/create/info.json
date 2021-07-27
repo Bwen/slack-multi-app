@@ -1,0 +1,5 @@
+{
+  "name": "create",
+  "desc": "Create a new pulse",
+  "usage": "/tt agile:pulse:create"
+}

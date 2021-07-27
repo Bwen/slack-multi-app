@@ -5,20 +5,23 @@ const responsePostMessage = require('../../../slack-responses/web.chat.postMessa
 module.exports = async (slackUser, slackReq) => {
   if (slackReq.module.params.repost) {
     const blocks = await fetchPoll(slackUser, 1, slackReq.module.params.page, 'poll:browse', false);
-    responsePostMessage.icon_emoji = ':bar_chart:';
-    responsePostMessage.blocks = blocks;
+    const responsePost = JSON.parse(JSON.stringify(responsePostMessage));
+    responsePost.icon_emoji = ':bar_chart:';
+    responsePost.blocks = blocks;
 
-    responsePostUrl.json.delete_original = true;
-    delete responsePostUrl.json.replace_original;
-    delete responsePostUrl.json.blocks;
-    return [responsePostUrl, responsePostMessage];
+    const responseUrl = JSON.parse(JSON.stringify(responsePostUrl));
+    responseUrl.json.delete_original = true;
+    delete responseUrl.json.replace_original;
+    delete responseUrl.json.blocks;
+    return [responseUrl, responsePost];
   }
 
   if (slackReq.module.params.page || slackReq.module.params.page === 0) {
     const blocks = await fetchPoll(slackUser, 1, slackReq.module.params.page, 'poll:browse');
-    responsePostUrl.json.replace_original = true;
-    responsePostUrl.json.blocks = blocks;
-    return responsePostUrl;
+    const responseUrl = JSON.parse(JSON.stringify(responsePostUrl));
+    responseUrl.json.replace_original = true;
+    responseUrl.json.blocks = blocks;
+    return responseUrl;
   }
 
   return {};

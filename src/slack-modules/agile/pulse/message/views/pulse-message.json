@@ -1,0 +1,96 @@
+{
+  "blocks": [
+    {
+      "type": "context",
+      "block_id": "pulse-info",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "actions",
+      "block_id": "remove",
+      "elements": [
+        {
+          "type": "button",
+          "style": "danger",
+          "confirm": {
+            "title": {
+              "type": "plain_text",
+              "text": "Remove!?"
+            },
+            "text": {
+              "type": "mrkdwn",
+              "text": "Are you sure you want to be removed from this Pulse?"
+            },
+            "confirm": {
+              "type": "plain_text",
+              "text": "Yes"
+            },
+            "deny": {
+              "type": "plain_text",
+              "text": "No"
+            }
+          },
+          "text": {
+            "type": "plain_text",
+            "text": "Remove me from this pulse"
+          },
+          "value": "agile:pulse:message removeFrom="
+        }
+      ]
+    },
+    {
+      "type": "input",
+      "block_id": "choice",
+      "dispatch_action": false,
+      "element": {
+        "type": "radio_buttons",
+        "options": [],
+        "action_id": "choice"
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "How was your day?",
+        "emoji": true
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "comment",
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "comment-action",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Write keywords to remind you of the reason of your choice"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Optional Keywords"
+      }
+    },
+    {
+      "type": "actions",
+      "block_id": "save",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Submit"
+          },
+          "value": "agile:pulse:message save=1",
+          "action_id": "save"
+        }
+      ]
+    }
+  ]
+}

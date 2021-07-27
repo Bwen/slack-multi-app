@@ -1,0 +1,54 @@
+{
+  "blocks": [
+    {
+      "type": "actions",
+      "block_id": "filters",
+      "elements": [
+        {
+          "type": "datepicker",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Select from date"
+          },
+          "action_id": "dateStart"
+        },
+        {
+          "type": "datepicker",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Select to date"
+          },
+          "action_id": "dateEnd"
+        },
+        {
+          "type": "static_select",
+          "action_id": "pulseId",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Select a pulse"
+          },
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "A Pulse",
+                "emoji": true
+              },
+              "value": "0"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "block_id": "warning",
+      "elements": [
+        {
+          "type": "plain_text",
+          "text": "The data only include your individual choices, unless you are the owner of the pulse."
+        }
+      ]
+    }
+  ]
+}

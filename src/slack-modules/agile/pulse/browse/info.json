@@ -1,0 +1,5 @@
+{
+  "name": "browse",
+  "desc": ["Manage current pulses, pause, stop, edit", "Search for specific pulse"],
+  "usage": ["/tt agile:pulse:browse", "/tt agile:pulse:browse \"search param\""]
+}
