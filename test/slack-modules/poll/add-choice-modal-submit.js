@@ -1,8 +1,9 @@
 /* eslint-env node, mocha */
 const { assert } = require('chai');
-const { createSlackUser } = require('../../utils');
+const { createSlackUser } = require('../../test-utils');
 const { createPoll } = require('./helper');
-const db = require('../../../sequelize');
+
+const db = require(`${process.env.root}/sequelize`);
 const addChoiceSubmit = require('../../../src/slack-modules/poll/choices/modal-submit');
 const slackReq = require('../../payloads/slack-requests/poll-add-choices-model-submit.json');
 

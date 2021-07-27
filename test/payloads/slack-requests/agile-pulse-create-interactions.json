@@ -1,0 +1,357 @@
+{
+  "module": {
+    "path": [
+      "agile",
+      "pulse",
+      "create"
+    ],
+    "params": {
+      "name": null,
+      "users": [],
+      "time": "17:00",
+      "interval": "weekly",
+      "question": null,
+      "choice": [
+        null,
+        null
+      ],
+      "monthly": null
+    }
+  },
+  "view": {
+    "id": "V024BKLL952",
+    "team_id": "T0194H3N84Q",
+    "type": "modal",
+    "blocks": [
+      {
+        "type": "input",
+        "block_id": "name",
+        "label": {
+          "type": "plain_text",
+          "text": "Name",
+          "emoji": true
+        },
+        "optional": false,
+        "dispatch_action": false,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "+bZZ6",
+          "dispatch_action_config": {
+            "trigger_actions_on": [
+              "on_enter_pressed"
+            ]
+          }
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "users",
+        "label": {
+          "type": "plain_text",
+          "text": "Users part of this pulse",
+          "emoji": true
+        },
+        "optional": false,
+        "dispatch_action": false,
+        "element": {
+          "type": "multi_users_select",
+          "action_id": "xd+",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Select users",
+            "emoji": true
+          }
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "time",
+        "label": {
+          "type": "plain_text",
+          "text": "Time the messages are sent",
+          "emoji": true
+        },
+        "optional": false,
+        "dispatch_action": false,
+        "element": {
+          "type": "timepicker",
+          "action_id": "01B4",
+          "initial_time": "17:00",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Select time",
+            "emoji": true
+          }
+        }
+      },
+      {
+        "type": "actions",
+        "block_id": "interval",
+        "elements": [
+          {
+            "type": "static_select",
+            "action_id": "interval",
+            "initial_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "Daily",
+                "emoji": true
+              },
+              "value": "agile:pulse:create interval=daily"
+            },
+            "options": [
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Daily",
+                  "emoji": true
+                },
+                "value": "agile:pulse:create interval=daily"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Weekly",
+                  "emoji": true
+                },
+                "value": "agile:pulse:create interval=weekly"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Monthly",
+                  "emoji": true
+                },
+                "value": "agile:pulse:create interval=monthly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "input",
+        "block_id": "monthly",
+        "label": {
+          "type": "plain_text",
+          "text": "Day of the month",
+          "emoji": true
+        },
+        "hint": {
+          "type": "plain_text",
+          "text": "If day does not exist for the month, notifications will not be sent.\nEx: 1, 5, 14, 25, 30, last",
+          "emoji": true
+        },
+        "optional": false,
+        "dispatch_action": false,
+        "element": {
+          "type": "plain_text_input",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Enter numerical day of the month",
+            "emoji": true
+          },
+          "dispatch_action_config": {
+            "trigger_actions_on": [
+              "on_enter_pressed"
+            ]
+          },
+          "action_id": "9Rj"
+        }
+      },
+      {
+        "type": "divider",
+        "block_id": "ebcOx"
+      },
+      {
+        "type": "input",
+        "block_id": "question",
+        "label": {
+          "type": "plain_text",
+          "text": "Question to be sent",
+          "emoji": true
+        },
+        "optional": false,
+        "dispatch_action": false,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "1Xg",
+          "dispatch_action_config": {
+            "trigger_actions_on": [
+              "on_enter_pressed"
+            ]
+          }
+        }
+      },
+      {
+        "type": "context",
+        "block_id": "FnZS",
+        "elements": [
+          {
+            "type": "mrkdwn",
+            "text": "The choices are assigned a value from the last one to the first, \nEx: Choice #6 (_the last_) will have a value of 0 and the choice #1 a value of 5\nEx: Choice #3 (_the last_) will have a value of 0 and the choice #1 a value of 2",
+            "verbatim": false
+          }
+        ]
+      },
+      {
+        "type": "input",
+        "block_id": "choice_1",
+        "label": {
+          "type": "plain_text",
+          "text": " ",
+          "emoji": true
+        },
+        "optional": false,
+        "dispatch_action": false,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "y6zXt",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Choice #1",
+            "emoji": true
+          },
+          "dispatch_action_config": {
+            "trigger_actions_on": [
+              "on_enter_pressed"
+            ]
+          }
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "choice_2",
+        "label": {
+          "type": "plain_text",
+          "text": " ",
+          "emoji": true
+        },
+        "optional": false,
+        "dispatch_action": false,
+        "element": {
+          "type": "plain_text_input",
+          "action_id": "bkM3I",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Choice #2",
+            "emoji": true
+          },
+          "dispatch_action_config": {
+            "trigger_actions_on": [
+              "on_enter_pressed"
+            ]
+          }
+        }
+      },
+      {
+        "type": "actions",
+        "block_id": "sample",
+        "elements": [
+          {
+            "type": "button",
+            "action_id": "10hd",
+            "text": {
+              "type": "plain_text",
+              "text": "Add Choice",
+              "emoji": true
+            },
+            "value": "agile:pulse:create addChoice=1"
+          }
+        ]
+      }
+    ],
+    "private_metadata": "agile:pulse:create channel=D018DCZSFFF",
+    "callback_id": "",
+    "state": {
+      "values": {
+        "name": {
+          "+bZZ6": {
+            "type": "plain_text_input",
+            "value": null
+          }
+        },
+        "users": {
+          "xd+": {
+            "type": "multi_users_select",
+            "selected_users": []
+          }
+        },
+        "time": {
+          "01B4": {
+            "type": "timepicker",
+            "selected_time": "17:00"
+          }
+        },
+        "interval": {
+          "interval": {
+            "type": "static_select",
+            "selected_option": {
+              "text": {
+                "type": "plain_text",
+                "text": "Weekly",
+                "emoji": true
+              },
+              "value": "agile:pulse:create interval=weekly"
+            }
+          }
+        },
+        "question": {
+          "1Xg": {
+            "type": "plain_text_input",
+            "value": null
+          }
+        },
+        "choice_1": {
+          "y6zXt": {
+            "type": "plain_text_input",
+            "value": null
+          }
+        },
+        "choice_2": {
+          "bkM3I": {
+            "type": "plain_text_input",
+            "value": null
+          }
+        },
+        "monthly": {
+          "9Rj": {
+            "type": "plain_text_input",
+            "value": null
+          }
+        }
+      }
+    },
+    "hash": "1623000984.snIn7Puq",
+    "title": {
+      "type": "plain_text",
+      "text": "Agile Pulse Creation",
+      "emoji": true
+    },
+    "clear_on_close": false,
+    "notify_on_close": false,
+    "close": {
+      "type": "plain_text",
+      "text": "Cancel",
+      "emoji": true
+    },
+    "submit": {
+      "type": "plain_text",
+      "text": "Submit",
+      "emoji": true
+    },
+    "previous_view_id": null,
+    "root_view_id": "V024BKLL952",
+    "app_id": "A018DC70CUD",
+    "external_id": "",
+    "app_installed_team_id": "T0194H3N84Q",
+    "bot_id": "B0194K7TZ40"
+  },
+  "channelId": null,
+  "messageTS": 0,
+  "triggerId": "2147667030036.1310581756160.41af1860385fa4116469a9d47b15ac92",
+  "responseUrl": null,
+  "isRaw": false,
+  "isCommand": false,
+  "isInteraction": true,
+  "isModalSubmission": false
+}

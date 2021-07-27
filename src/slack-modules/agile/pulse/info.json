@@ -1,0 +1,5 @@
+{
+  "name": "pulse",
+  "desc": "Manage team pulses that are send at a regular interval",
+  "usage": "/tt agile:pulse"
+}

@@ -13,6 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       field: 'user_id',
     },
+    timezone: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    timezoneOffset: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      field: 'timezone_offset',
+    },
     avatarHash: {
       type: DataTypes.STRING,
       field: 'avatar_hash',

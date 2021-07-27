@@ -1,10 +1,11 @@
 /* eslint-env node, mocha */
 const { assert } = require('chai');
-const { createSlackUser } = require('../../utils');
+const { createSlackUser } = require('../../test-utils');
 const { createPoll } = require('./helper');
 const slackReq = require('../../payloads/slack-requests/poll-vote-interaction.json');
 const vote = require('../../../src/slack-modules/poll/vote/interactions');
-const db = require('../../../sequelize');
+
+const db = require(`${process.env.root}/sequelize`);
 
 describe('slack-modules poll:vote interactions', () => {
   beforeEach(async () => {

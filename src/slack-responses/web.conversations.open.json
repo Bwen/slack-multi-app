@@ -1,0 +1,8 @@
+{
+  "type": "web.conversations.open",
+  "text": "Posting message to private user channel",
+  "channel": null,
+  "icon_emoji": null,
+  "username": null,
+  "blocks": []
+}

@@ -1,4 +1,4 @@
-const db = require('../../../sequelize');
+const db = require(`${process.env.root}/sequelize`);
 // const { createSlackUser } = require('../../utils');
 
 async function createGroup(options = {}) {

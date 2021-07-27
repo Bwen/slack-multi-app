@@ -1,5 +1,5 @@
-const db = require('../../../sequelize');
-const { createSlackUser } = require('../../utils');
+const db = require(`${process.env.root}/sequelize`);
+const { createSlackUser } = require('../../test-utils');
 
 async function createPoll(options) {
   const slackUser = await createSlackUser();

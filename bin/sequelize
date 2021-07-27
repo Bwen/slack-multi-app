@@ -14,6 +14,7 @@ else
     docker run \
         --rm \
         --name slack-app \
+        --net=host \
         --env-file .env \
         -e NODE_ENV=development \
         -v $pwd:/home/node/app \

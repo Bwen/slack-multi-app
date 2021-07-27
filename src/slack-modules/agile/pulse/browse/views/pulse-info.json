@@ -1,0 +1,197 @@
+{
+  "blocks": [
+    {
+      "type": "header",
+      "block_id": "name",
+      "text": {
+        "type": "plain_text",
+        "text": "Pulse Name",
+        "emoji": true
+      }
+    },
+    {
+      "type": "actions",
+      "block_id": "status",
+      "elements": [
+        {
+          "type": "button",
+          "action_id": "running",
+          "value": "agile:pulse:browse status=running",
+          "style": "primary",
+          "text": {
+            "type": "plain_text",
+            "text": "Activate",
+            "emoji": true
+          }
+        },
+        {
+          "type": "button",
+          "action_id": "paused",
+          "value": "agile:pulse:browse status=paused",
+          "text": {
+            "type": "plain_text",
+            "text": "Pause",
+            "emoji": true
+          }
+        },
+        {
+          "type": "button",
+          "action_id": "deleted",
+          "value": "agile:pulse:browse status=deleted",
+          "confirm": {
+            "title": {
+              "type": "plain_text",
+              "text": "Delete!?"
+            },
+            "text": {
+              "type": "mrkdwn",
+              "text": "Once deleted, you will no longer have access :scream:\n\nAre you sure?"
+            },
+            "confirm": {
+              "type": "plain_text",
+              "text": "Yes"
+            },
+            "deny": {
+              "type": "plain_text",
+              "text": "No"
+            }
+          },
+          "style": "danger",
+          "text": {
+            "type": "plain_text",
+            "text": "Delete",
+            "emoji": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "block_id": "id",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "Pulse #"
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "block_id": "info",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*Author:*\nPhilippe Guilbault"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Weekends:*\nNo"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Status:*\nPaused"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Interval:*\nDaily"
+        }
+      ],
+      "accessory": {
+        "type": "image",
+        "image_url": "https://ttpg.ngrok.io/images/heart-with-pulse.png",
+        "alt_text": "Its Pulsing!"
+      }
+    },
+    {
+      "type": "section",
+      "block_id": "modify_members",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Members of Pulse:*"
+      },
+      "accessory": {
+        "type": "button",
+        "text": {
+          "type": "plain_text",
+          "text": "Modify members",
+          "emoji": true
+        },
+        "value": "agile:pulse:browse modifyMembers=1"
+      }
+    },
+    {
+      "type": "context",
+      "block_id": "members",
+      "elements": [
+        {
+          "type": "image",
+          "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+          "alt_text": "cute cat"
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "block_id": "next_pulse",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Next 3 Pulses:*"
+      }
+    },
+    {
+      "type": "context",
+      "block_id": "next_dates",
+      "elements": [
+        {
+          "type": "plain_text",
+          "text": "Unknown"
+        }
+      ]
+    },
+
+    {
+      "type": "section",
+      "block_id": "question",
+      "fields": [
+        {
+          "type": "mrkdwn",
+          "text": "*Question:*\nHow was your day?"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Choice 1:*\n:smile:"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Choice 2:*\nTest1"
+        },
+        {
+          "type": "mrkdwn",
+          "text": "*Choice 3:*\nTest2"
+        }
+      ]
+    },
+    {
+      "type": "actions",
+      "block_id": "sample",
+      "elements": [
+        {
+          "type": "button",
+          "action_id": "send-sample",
+          "text": {
+            "type": "plain_text",
+            "text": "Send Sample to me",
+            "emoji": true
+          },
+          "value": "agile:pulse:browse sample=1"
+        }
+      ]
+    }
+  ]
+}

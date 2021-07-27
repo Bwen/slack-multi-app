@@ -1,0 +1,22 @@
+[
+  {
+    "type": "input",
+    "block_id": "monthly",
+    "element": {
+      "type": "plain_text_input",
+      "placeholder": {
+        "type": "plain_text",
+        "text": "Enter numerical day of the month"
+      }
+    },
+    "label": {
+      "type": "plain_text",
+      "text": "Day of the month",
+      "emoji": true
+    },
+    "hint": {
+      "type": "plain_text",
+      "text": "If day does not exist for the month, notifications will not be sent.\nEx: 1, 5, 14, 25, 30, last"
+    }
+  }
+]

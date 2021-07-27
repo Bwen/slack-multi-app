@@ -1,0 +1,32 @@
+{
+  "module": {
+    "path": [
+      "agile",
+      "pulse",
+      "create"
+    ],
+    "params": {
+      "name": "Testing Team",
+      "users": [
+        "U01880B2JB0"
+      ],
+      "time": "17:00",
+      "interval": "daily",
+      "question": "Testing is good, yes?",
+      "choice": [
+        "Test 1",
+        "Test 2",
+        "Test 3"
+      ]
+    }
+  },
+  "view": null,
+  "channelId": "D018DCZSFFF",
+  "messageTS": 0,
+  "triggerId": "2134548665094.1310581756160.823ada5dc803f08021ce1f76974bb44a",
+  "responseUrl": null,
+  "isRaw": false,
+  "isCommand": false,
+  "isInteraction": false,
+  "isModalSubmission": true
+}

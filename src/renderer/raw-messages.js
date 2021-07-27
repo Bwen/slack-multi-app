@@ -76,7 +76,6 @@ function renderList(data) {
         for (let i = 0; i < numberOfColumns; i += 1) {
           if (!Array.isArray(item[i])) {
             list += ' '.repeat(columnWidths[i]);
-            // eslint-disable-next-line no-continue
             continue;
           }
 

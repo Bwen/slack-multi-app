@@ -1,0 +1,179 @@
+{
+  "type": "modal",
+  "private_metadata": "agile:pulse:create",
+  "title": {
+    "type": "plain_text",
+    "text": "Agile Pulse Creation",
+    "emoji": true
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Submit",
+    "emoji": true
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Cancel",
+    "emoji": true
+  },
+  "blocks": [
+    {
+      "type": "input",
+      "block_id": "name",
+      "element": {
+        "type": "plain_text_input"
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Name",
+        "emoji": true
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "users",
+      "element": {
+        "type": "multi_users_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select users",
+          "emoji": true
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Users part of this pulse",
+        "emoji": true
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "time",
+      "element": {
+        "type": "timepicker",
+        "initial_time": "17:00",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select time",
+          "emoji": true
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Time the messages are sent",
+        "emoji": true
+      }
+    },
+    {
+      "type": "actions",
+      "block_id": "interval",
+      "elements": [
+        {
+          "type": "static_select",
+          "action_id": "interval",
+          "initial_option": {
+            "text": {
+              "type": "plain_text",
+              "text": "Daily"
+            },
+            "value": "agile:pulse:create interval=daily"
+          },
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Daily",
+                "emoji": true
+              },
+              "value": "agile:pulse:create interval=daily"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Weekly",
+                "emoji": true
+              },
+              "value": "agile:pulse:create interval=weekly"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "Monthly",
+                "emoji": true
+              },
+              "value": "agile:pulse:create interval=monthly"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "input",
+      "block_id": "question",
+      "element": {
+        "type": "plain_text_input"
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Question to be sent",
+        "emoji": true
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "The choices are assigned a value from the last one to the first, \nEx: Choice #6 (_the last_) will have a value of 0 and the choice #1 a value of 5\nEx: Choice #3 (_the last_) will have a value of 0 and the choice #1 a value of 2"
+        }
+      ]
+    },
+    {
+      "type": "input",
+      "block_id": "choice_1",
+      "element": {
+        "type": "plain_text_input",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Choice #1"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": " "
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "choice_2",
+      "element": {
+        "type": "plain_text_input",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Choice #2"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": " "
+      }
+    },
+    {
+      "type": "actions",
+      "block_id": "sample",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Add Choice"
+          },
+          "value": "agile:pulse:create addChoice=1"
+        }
+      ]
+    }
+  ]
+}

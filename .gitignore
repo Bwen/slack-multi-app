@@ -4,4 +4,4 @@ coverage/*
 node_modules/
 test/data/*
 .env
-.env-tools
+public/volume

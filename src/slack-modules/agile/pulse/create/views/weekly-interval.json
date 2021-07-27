@@ -1,0 +1,71 @@
+[
+  {
+    "type": "input",
+    "block_id": "weekly",
+    "element": {
+      "type": "static_select",
+      "placeholder": {
+        "type": "plain_text",
+        "text": "Select a day of the week",
+        "emoji": true
+      },
+      "options": [
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Sunday"
+          },
+          "value": "0"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Monday"
+          },
+          "value": "1"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Tuesday"
+          },
+          "value": "2"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Wednesday"
+          },
+          "value": "3"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Thursday"
+          },
+          "value": "4"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Friday"
+          },
+          "value": "5"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Saturday"
+          },
+          "value": "6"
+        }
+      ],
+      "action_id": "weekly-choice"
+    },
+    "label": {
+      "type": "plain_text",
+      "text": "Day of the week",
+      "emoji": true
+    }
+  }
+]

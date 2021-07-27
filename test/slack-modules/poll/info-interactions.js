@@ -1,9 +1,10 @@
 /* eslint-env node, mocha */
 const { assert } = require('chai');
-const { createSlackUser } = require('../../utils');
+const { createSlackUser } = require('../../test-utils');
 const { createPoll, getBlock } = require('./helper');
 const info = require('../../../src/slack-modules/poll/info/interactions');
-const db = require('../../../sequelize');
+
+const db = require(`${process.env.root}/sequelize`);
 
 describe('slack-modules poll:info interactions (modal)', () => {
   beforeEach(async () => {

@@ -1,0 +1,5 @@
+{
+  "name": "data",
+  "desc": "Displays the values for a pulse",
+  "usage": "/tt agile:pulse:data"
+}

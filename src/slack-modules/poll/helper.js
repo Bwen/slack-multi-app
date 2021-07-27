@@ -41,7 +41,6 @@ function getVotesPerUser(votes) {
 }
 
 async function generatePollBlocks(pollId, readOnly = false) {
-  const votesTemplate = { type: 'context', elements: [] };
   const blocks = [];
   const poll = await db.Poll.findByPk(pollId, {
     attributes: ['id', 'endDate', 'question', 'suggestion', 'postAnonymous', 'anonymousVotes'],
@@ -123,43 +122,69 @@ async function generatePollBlocks(pollId, readOnly = false) {
       text = `${choiceEmoji(index + 1)} ${item.text}`;
     }
 
-    votesTemplate.elements = [];
-    if (poll.anonymousVotes === 'yes') {
-      let numberOfVotes = `${item.PollVotes.length} Votes`;
-      if (!numberOfVotes) {
-        numberOfVotes = 'No Votes';
-      }
-
-      votesTemplate.elements.push({
-        type: 'mrkdwn',
-        text: numberOfVotes,
-      });
-    } else {
-      const votesPerUsers = getVotesPerUser(item.PollVotes);
-      let totalVotes = 0;
-      votesPerUsers.forEach((vote) => {
-        totalVotes += vote.votes;
-        votesTemplate.elements.push({
-          type: 'image',
-          image_url: vote.image,
-          alt_text: `${vote.name}, ${vote.votes} Votes`,
-        });
-      });
-
-      if (!votesTemplate.elements.length) {
-        votesTemplate.elements.push({ type: 'mrkdwn', text: 'No votes' });
-      } else {
-        votesTemplate.elements.push({ type: 'mrkdwn', text: `${totalVotes} votes` });
-      }
-    }
-
     choiceTemplate.text.text = text;
     if (!readOnly) {
       choiceTemplate.accessory.action_id = `vote_${poll.id}_${item.id}`;
       choiceTemplate.accessory.value = `poll:vote pollId=${poll.id}&choiceId=${item.id}`;
     }
     blocks.push(JSON.parse(JSON.stringify(choiceTemplate)));
-    blocks.push(JSON.parse(JSON.stringify(votesTemplate)));
+
+    if (poll.anonymousVotes === 'yes') {
+      let numberOfVotes = `${item.PollVotes.length} Votes`;
+      if (!numberOfVotes) {
+        numberOfVotes = 'No Votes';
+      }
+
+      const votesTemplate = { type: 'context', elements: [] };
+      votesTemplate.elements.push({
+        type: 'mrkdwn',
+        text: numberOfVotes,
+      });
+      blocks.push(JSON.parse(JSON.stringify(votesTemplate)));
+    } else {
+      const votesPerUsers = getVotesPerUser(item.PollVotes);
+
+      // Slack blocks only allow up to 10 elements maximum,
+      // So we need to split it in chunks of 10
+      let totalVotes = 0;
+      let i;
+      let j;
+      const chunk = 10;
+      const voteTemplates = [];
+      for (i = 0, j = votesPerUsers.length; i < j; i += chunk) {
+        const votes = votesPerUsers.slice(i, i + chunk);
+        const template = { type: 'context', elements: [] };
+        // eslint-disable-next-line no-loop-func
+        votes.forEach((vote) => {
+          totalVotes += vote.votes;
+          template.elements.push({
+            type: 'image',
+            image_url: vote.image,
+            alt_text: `${vote.name}, ${vote.votes} Votes`,
+          });
+        });
+
+        voteTemplates.push(template);
+      }
+
+      if (!voteTemplates.length) {
+        const template = { type: 'context', elements: [] };
+        template.elements.push({ type: 'mrkdwn', text: 'No votes' });
+        blocks.push(template);
+      } else {
+        if (voteTemplates.length === 1 && voteTemplates[0].elements.length < 9) {
+          voteTemplates[0].elements.push({ type: 'mrkdwn', text: `${totalVotes} votes` });
+        } else {
+          const template = { type: 'context', elements: [] };
+          template.elements.push({ type: 'mrkdwn', text: `${totalVotes} votes` });
+          voteTemplates.push(template);
+        }
+
+        voteTemplates.forEach((vTemplate) => {
+          blocks.push(vTemplate);
+        });
+      }
+    }
   });
 
   if (poll.endDate) {
@@ -184,21 +209,45 @@ async function generatePollBlocks(pollId, readOnly = false) {
   return blocks;
 }
 
-async function fetchPoll(slackUser, perPage, page, modulePath, readOnly = true) {
-  const { count, rows } = await db.Poll.findAndCountAll({
+async function fetchPoll(slackUser, perPage, page, modulePath, readOnly = true, querystring) {
+  const where = { createdBy: slackUser.id };
+  const rows = await db.Poll.findAll({
     attributes: ['id', 'createdAt'],
-    where: { createdBy: slackUser.id },
+    where,
     limit: perPage,
     offset: (perPage * page),
     order: [['createdAt', 'DESC']],
   });
+
+  if (rows.length === 0) {
+    let search = '...';
+    if (querystring) {
+      search = ', for the query: ';
+      search += querystring;
+    }
+
+    return [{
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `We could not find any polls${search}`,
+      },
+    }];
+  }
 
   const blocks = await generatePollBlocks(rows[0].id, readOnly);
   if (!readOnly) {
     return blocks;
   }
 
-  const paginationButton = { type: 'actions', elements: getPaginationButtons(count, perPage, page, modulePath) };
+  blocks.push({ type: 'divider' });
+  blocks.push({
+    type: 'context',
+    elements: [{ type: 'plain_text', text: `${rows[0].createdAt}`, emoji: true }],
+  });
+
+  const totalEntries = await db.Poll.count({ where });
+  const paginationButton = { type: 'actions', elements: getPaginationButtons(totalEntries, perPage, page, modulePath) };
   paginationButton.elements.push({
     type: 'button',
     action_id: 're-post',
@@ -208,12 +257,8 @@ async function fetchPoll(slackUser, perPage, page, modulePath, readOnly = true) 
     },
     value: `${modulePath} page=${page}&repost=1`,
   });
-  blocks.push({ type: 'divider' });
-  blocks.push({
-    type: 'context',
-    elements: [{ type: 'plain_text', text: `${rows[0].createdAt}`, emoji: true }],
-  });
   blocks.push(paginationButton);
+
   return blocks;
 }
 

@@ -11,8 +11,11 @@ slack-modules
             |- command.js
             |- interactions.js
             |- modal-submit.js
+            |- raw.js
         |- info
         |- vote
+        |- task1-cron.js
+        |- task2-cron.js
 ```
 
 Depending on the Slack payload the system will determine what type 
@@ -20,6 +23,8 @@ of events it is and load the appropriate file:
 - for a slash command (_`command.js`_)
 - for an interaction (_`interactions.js`_)
 - for a modal submission (_`modal-submit.js`_)
+- for requests that do not come from slack but http directly (_`raw.js`_)
+- for a periodic tasks (_`*-cron.js`_)
 
 It also determines where to exactly to load the file in the directory structure. When
 the server is started the directory `src/slack-modules` is crawled recursively, and made into a tree
@@ -88,3 +93,26 @@ let response = JSON.parse(JSON.stringify(jsonResponse));
 ```
 This will avoid artifacts/references from previous requests.
 
+### Periodic tasks (_cron jobs_)
+As you may have noticed the files `*-cron.js`, a file ending with `cron.js` will be picked up and scheduled if
+it has the following structure:
+```javascript
+module.exports = {
+          // ┌────────────── second (optional)
+          // │ ┌──────────── minute
+          // │ │ ┌────────── hour
+          // │ │ │ ┌──────── day of month
+          // │ │ │ │ ┌────── month
+          // │ │ │ │ │ ┌──── day of week
+          // │ │ │ │ │ │
+          // │ │ │ │ │ │
+          // * * * * * *
+    schedule: '* * * * *', // Execute every minute
+    task: () => {
+        console.log('Run every minute');
+    }
+};
+```
+
+The property `task` can either be asynchronous or not. The libary used in the backend is [node-cron](https://www.npmjs.com/package/node-cron),
+which is well documented.

@@ -25,21 +25,20 @@ async function savePoll(slackUser, params) {
     votePerUser: parseInt(params.vote_per_user, 10),
   });
 
-  const promises = params.choice.map(async (choice) => {
-    const pollChoice = db.PollChoice.build({
+  for (let i = 0; i < params.choice.length; i += 1) {
+    await db.PollChoice.create({
       pollId: poll.id,
-      text: choice,
+      text: params.choice[i],
     });
-    await pollChoice.save();
-  });
-  await Promise.all(promises);
+  }
 
   return poll.id;
 }
 
 module.exports = async (slackUser, slackReq) => {
   const pollId = await savePoll(slackUser, slackReq.module.params);
-  responsePostMessage.icon_emoji = ':bar_chart:';
-  responsePostMessage.blocks = await generatePollBlocks(pollId);
-  return responsePostMessage;
+  const responsePost = JSON.parse(JSON.stringify(responsePostMessage));
+  responsePost.icon_emoji = ':bar_chart:';
+  responsePost.blocks = await generatePollBlocks(pollId);
+  return responsePost;
 };

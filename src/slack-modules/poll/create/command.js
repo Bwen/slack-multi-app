@@ -23,16 +23,12 @@ async function quickCreate(slackUser, params) {
   });
 
   if (params.length) {
-    // eslint-disable-next-line no-plusplus
-    const promises = params.map(async (choice) => {
-      const pollChoice = db.PollChoice.build({
+    for (let i = 0; i < params.length; i += 1) {
+      await db.PollChoice.create({
         pollId: poll.id,
-        text: choice,
+        text: params[i],
       });
-      await pollChoice.save();
-    });
-
-    await Promise.all(promises);
+    }
   }
 
   return poll.id;
@@ -43,9 +39,10 @@ module.exports = async (slackUser, slackReq) => {
   if (slackReq.module.params.values && slackReq.module.params.values.length) {
     const pollId = await quickCreate(slackUser, slackReq.module.params.values);
 
-    responsePostMessage.icon_emoji = ':bar_chart:';
-    responsePostMessage.blocks = await generatePollBlocks(pollId);
-    return responsePostMessage;
+    const responsePost = JSON.parse(JSON.stringify(responsePostMessage));
+    responsePost.icon_emoji = ':bar_chart:';
+    responsePost.blocks = await generatePollBlocks(pollId);
+    return responsePost;
   }
 
   const createModal = JSON.parse(JSON.stringify(viewCreate));
