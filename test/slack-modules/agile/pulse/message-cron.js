@@ -41,7 +41,7 @@ describe('slack-modules agile:pulse:message-cron', () => {
     const pulse = await savePulse(slackUser, {
       name: 'Pulse Test',
       users: [slackUser.slackId, slackMember1.slackId],
-      time: moment().format('HH:mm'),
+      time: moment().utc().format('HH:mm'),
       interval: 'daily',
       question: 'Pulse Question 2',
       choice: [
@@ -63,7 +63,7 @@ describe('slack-modules agile:pulse:message-cron', () => {
     const pulse = await savePulse(slackUser, {
       name: 'Pulse Test',
       users: [slackUser.slackId, slackMember1.slackId],
-      time: moment().add(5, 'minutes').format('HH:mm'),
+      time: moment().utc().add(5, 'minutes').format('HH:mm'),
       interval: 'daily',
       question: 'Pulse Question 2',
       choice: [
@@ -88,7 +88,7 @@ describe('slack-modules agile:pulse:message-cron', () => {
     const pulse1 = await savePulse(slackUser, {
       name: 'Pulse Test 1',
       users: [slackUser.slackId, slackMember1.slackId],
-      time: moment().format('HH:mm'),
+      time: moment().utc().format('HH:mm'),
       interval: 'daily',
       question: 'Pulse Question 1',
       choice: [
@@ -102,7 +102,7 @@ describe('slack-modules agile:pulse:message-cron', () => {
     const pulse2 = await savePulse(slackUser, {
       name: 'Pulse Test 2',
       users: [slackUser.slackId, slackMember1.slackId],
-      time: moment().format('HH:mm'),
+      time: moment().utc().format('HH:mm'),
       interval: 'daily',
       question: 'Pulse Question 2',
       choice: [

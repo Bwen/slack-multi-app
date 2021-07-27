@@ -45,7 +45,7 @@ module.exports = {
       }
 
       const nextPulse = moment.utc(pulse.nextPulse).tz(pulse.User.UserProfile.timezone);
-      if (nextPulse.diff(now, 'minutes') > 1) {
+      if (nextPulse.diff(now, 'minutes') > 1 || nextPulse.diff(now, 'minutes') < 0) {
         continue;
       }
 
