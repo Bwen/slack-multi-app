@@ -1,7 +1,8 @@
 /* eslint-env node, mocha */
 const { assert } = require('chai');
-const { createSlackUser } = require('../../utils');
-const db = require('../../../sequelize');
+const { createSlackUser } = require('../../test-utils');
+
+const db = require(`${process.env.root}/sequelize`);
 const pollCreate = require('../../../src/slack-modules/poll/create/command');
 
 describe('slack-modules poll:create (modal)', () => {

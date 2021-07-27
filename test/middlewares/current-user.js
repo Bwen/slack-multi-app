@@ -1,40 +1,14 @@
 /* eslint-env node, mocha */
+// Already mock-required in _beforeAll.test.js
+const mockSlackApi = require('../mocks/wrapper-slack-api');
+
 const mock = require('mock-require');
 
-let profileCalled = false;
-mock('../../src/wrapper-slack-api.js', {
-  getSlackApi: () => ({
-    users: {
-      profile: {
-        get: async () => new Promise((resolve) => {
-          profileCalled = true;
-          resolve({
-            profile: {
-              avatar_hash: 'test',
-              status_text: 'test',
-              status_emoji: ':test:',
-              status_expiration: 0,
-              real_name: 'test',
-              display_name: 'test',
-              email: 'test@email.com',
-              team: 'team-test',
-              image_original: 'original.png',
-              image_24: 'test24.png',
-              image_32: 'test32.png',
-              image_48: 'test48.png',
-              image_72: 'test72.png',
-              image_192: 'test192.png',
-              image_512: 'test512.png',
-            },
-          });
-        }),
-      },
-    },
-  }),
-});
+mock('../../src/wrapper-slack-api.js', mockSlackApi);
 
 const { assert } = require('chai');
-const db = require('../../sequelize');
+
+const db = require(`${process.env.root}/sequelize`);
 const currentUser = require('../../src/middlewares/current-user');
 
 let nextCalled = false;
@@ -46,12 +20,11 @@ describe('current-user', () => {
     await db.UserProfile.truncate();
   });
 
-  // const randomId = Math.floor(Math.random() * 9999999999);
   it('creates user and profile if it does not exists body', async () => {
-    const req = { body: { user_id: 'TESTSLACKUSERID1' } };
+    const req = { body: { user_id: 'TESTSLACKUSERID1' }, query: {} };
     await currentUser()(req, {}, mockNext);
     assert.isTrue(nextCalled);
-    assert.isTrue(profileCalled);
+    assert.isTrue(mockSlackApi.isProfileCalled());
 
     assert.equal(req.currentUser.UserProfile.avatarHash, 'test');
     assert.equal(req.currentUser.UserProfile.statusText, 'test');
@@ -71,10 +44,10 @@ describe('current-user', () => {
   });
 
   it('creates user and profile if it does not exists payload', async () => {
-    const req = { body: { payload: '{"user": {"id": "TESTSLACKUSERID2"}}' } };
+    const req = { body: { payload: '{"user": {"id": "TESTSLACKUSERID2"}}' }, query: {} };
     await currentUser()(req, {}, mockNext);
     assert.isTrue(nextCalled);
-    assert.isTrue(profileCalled);
+    assert.isTrue(mockSlackApi.isProfileCalled());
 
     assert.equal(req.currentUser.UserProfile.avatarHash, 'test');
     assert.equal(req.currentUser.UserProfile.statusText, 'test');

@@ -1,8 +1,9 @@
 /* eslint-env node, mocha */
 const { assert } = require('chai');
-const { createSlackUser } = require('../utils');
+const { createSlackUser } = require('../test-utils');
 const slackGroupAcl = require('../../src/middlewares/slack-group-acl')();
-const db = require('../../sequelize');
+
+const db = require(`${process.env.root}/sequelize`);
 
 let nextCalled = false;
 const mockNext = () => { nextCalled = true; };

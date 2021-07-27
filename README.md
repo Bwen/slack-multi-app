@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/gphilippe/slack-app/badge.svg?branch=master)](https://coveralls.io/github/gphilippe/slack-app?branch=master)
+
 # Slack Multi APPs
 Supports multiple sub-apps within the same structure,
 governed by a centralized group ACL. The project is not meant to be published on the Slack APP 
@@ -10,8 +12,10 @@ For more information on the [Slack Module System](./src/slack-modules/README.md)
 
 For more information on the access restrictions you can read about the [Admin Module](./src/slack-modules/admin/README.md).
 
-The project comes with a [Poll Module](./src/slack-modules/poll/README.md), which serves as
-an example of how the module system works with modals, interactions, form submission, etc...
+The project comes with [Poll Module](./src/slack-modules/poll/README.md)
+& [Agile Pulse Module](./src/slack-modules/agile/pulse/README.md), which serves as
+an example of how the module system works with modals, 
+interactions, form submission, generating charts, periodic tasks, download of custom data, etc...
 
 #### The libraries
 At its core it is built with [NodeJS](https://nodejs.org/) on top of the HTTP framework [Express](https://expressjs.com/).
@@ -87,7 +91,7 @@ bin/npm run lint
 bin/npm run test
 
 // Stop the server
-bin/stop_app run dev
+bin/stop_app
 ```
 
 To create new [Sequelize](https://sequelize.org/) Models & Migrations we created another shortcut in `bin/sequelize`.
