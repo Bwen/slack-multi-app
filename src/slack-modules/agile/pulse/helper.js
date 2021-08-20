@@ -6,7 +6,7 @@ const pulseInfoView = require('./browse/views/pulse-info.json');
 const pulsePrivateMessageView = require('./message/views/pulse-message.json');
 
 async function generatePulseBlocks(pulse, page, query) {
-  const { blocks } = JSON.parse(JSON.stringify(pulseInfoView));
+  const { blocks } = JSON.parse(JSON.stringify(pulseInfoView).replace('{SLACK_APP_DOMAIN}', process.env.SLACK_APP_DOMAIN));
   const indexName = findIndexByBlockId('name', blocks);
   blocks[indexName].text.text = pulse.name;
 
@@ -240,7 +240,7 @@ async function generatePrivateMessageBlocks(pulseId) {
         text: choice.text,
         emoji: true,
       },
-      value: `agile:pulse:message choiceId=${choice.id}&choiceText="${choice.text}"`,
+      value: `choiceId=${choice.id}&choiceText="${choice.text}"`,
     });
   });
 

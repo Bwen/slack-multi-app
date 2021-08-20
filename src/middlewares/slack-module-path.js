@@ -100,6 +100,7 @@ function getPathParams(modulePathString) {
   let params = {};
   for (let i = 0; i < parts.length; i += 1) {
     const value = parts[i].replace(/^"/, '').replace(/"$/, '');
+
     if (value.match(/[a-z0-9._-]+=/i)) {
       params = Object.assign(params, querystring.parse(value));
     } else {
@@ -126,6 +127,10 @@ function getPathParams(modulePathString) {
 
 function normalizeValues(key, value) {
   const params = [];
+
+  // eslint-disable-next-line no-param-reassign
+  key = key.replace(/^([a-zA-Z0-9]+:.*? )/i, '');
+
   // If we have a query string as a value we parse it
   if (typeof value === 'string' && value.match(/[&=]/)) {
     // Strip module path from value if any
@@ -133,7 +138,9 @@ function normalizeValues(key, value) {
     normalizedValue = value.replace(/"/g, '');
 
     const qs = querystring.parse(normalizedValue);
-    for (const [k, v] of Object.entries(qs)) {
+    // eslint-disable-next-line prefer-const
+    for (let [k, v] of Object.entries(qs)) {
+      k = k.replace(/^([a-zA-Z0-9]+:.*? )/i, '');
       params[k] = v;
     }
   } else {
