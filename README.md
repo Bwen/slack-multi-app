@@ -1,7 +1,7 @@
-![BUILD](https://img.shields.io/github/workflow/status/Bwen/slack-multi-app/continuous-integration.yml/master?style=for-the-badge&logo=github)
+![BUILD](https://img.shields.io/github/workflow/status/Bwen/slack-multi-app/Continuous%20Integration/master?style=for-the-badge&logo=github)
 ![COVERAGE](https://img.shields.io/coveralls/github/Bwen/slack-multi-app/master?style=for-the-badge&logo=coveralls)
 ![ExpressJs](https://img.shields.io/github/package-json/dependency-version/Bwen/slack-multi-app/express?style=for-the-badge)
-![Slack API](https://img.shields.io/github/package-json/dependency-version/Bwen/slack-multi-app/@slack/web-api?logo=slack)
+![Slack API](https://img.shields.io/github/package-json/dependency-version/Bwen/slack-multi-app/@slack/web-api?style=for-the-badge&logo=slack)
 
 
 ![Current Version](https://img.shields.io/github/package-json/version/Bwen/slack-multi-app?style=for-the-badge)
