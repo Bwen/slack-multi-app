@@ -1,4 +1,10 @@
-[![Coverage Status](https://coveralls.io/repos/github/gphilippe/slack-app/badge.svg?branch=master)](https://coveralls.io/github/gphilippe/slack-app?branch=master)
+![BUILD](https://img.shields.io/github/workflow/status/Bwen/slack-multi-app/continuous-integration.yml/master?style=for-the-badge&logo=github)
+![COVERAGE](https://img.shields.io/coveralls/github/Bwen/slack-multi-app/master?style=for-the-badge&logo=coveralls)
+![ExpressJs](https://img.shields.io/github/package-json/dependency-version/Bwen/slack-multi-app/express?style=for-the-badge)
+![Slack API](https://img.shields.io/github/package-json/dependency-version/Bwen/slack-multi-app/@slack/web-api?logo=slack)
+
+
+![Current Version](https://img.shields.io/github/package-json/version/Bwen/slack-multi-app?style=for-the-badge)
 
 # Slack Multi APPs
 Supports multiple sub-apps within the same structure,
