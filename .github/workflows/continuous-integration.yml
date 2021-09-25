@@ -51,12 +51,15 @@ jobs:
           cache: 'npm'
 
       - run: sudo apt-get install sqlite3
-      - run: npm install -g coveralls nyc sequelize-cli
+      - run: npm install nyc sequelize-cli
       - run: npm install
       - run: npm run test
       - run: npm run coverage
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
+      - name: Publish code coverage to Code Climate
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          coverageLocations: |
+            ${{github.workspace}}/*.lcov:lcov
